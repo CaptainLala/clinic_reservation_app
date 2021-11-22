@@ -1,4 +1,5 @@
-import 'package:clinic_reservation_app/screens/auth_screen.dart';
+import 'package:clinic_reservation_app/screens/login_screen.dart';
+import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +13,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthScreen(),
-      routes: const {},
+      home: const LoginScreen(),
+      routes: {
+        SignUpScreen.routeName: (context) => const SignUpScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+      },
     );
   }
 }

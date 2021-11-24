@@ -16,9 +16,7 @@ class LoginScreen extends StatelessWidget {
             flex: 2,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 50),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
+              decoration: const BoxDecoration(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,44 +75,47 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.amber,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text(
-                      'OR',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.black,
-                      ),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SignUpScreen.routeName);
-                        },
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
+            child: ClipPath(
+              clipper: ClippingClass(),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.amber,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        'OR',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.black,
+                        ),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, SignUpScreen.routeName);
+                          },
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -129,7 +130,11 @@ class ClippingClass extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-
+    path.lineTo(0, size.height);
+    path.lineTo(0, 0);
+    path.quadraticBezierTo(size.width / 2, size.height * 0.3, size.width, 0);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
     return path;
   }
 

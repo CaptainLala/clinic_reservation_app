@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
@@ -24,96 +25,88 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.zero,
         children: [
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              decoration: const BoxDecoration(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Spacer(),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Welcome To',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        'Salahaddin Clinic',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                      Text(
-                        'Please login to continue',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: TextField(
-                      keyboardType: TextInputType.phone,
-                      controller: _phoneController,
-                      textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(15),
-                        label: Text('Phone Number'),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            padding: const EdgeInsets.symmetric(horizontal: 50),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    AutoSizeText(
+                      'Welcome to',
+                      style: TextStyle(
+                        fontSize: 18,
                       ),
                     ),
+                    AutoSizeText(
+                      'Salahaddin Clinic',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    AutoSizeText(
+                      'Please login to continue',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                  const Spacer(),
-                  const DefaultButton(
-                    label: 'Log in',
-                    route: '',
+                  child: TextField(
+                    keyboardType: TextInputType.phone,
+                    controller: _phoneController,
+                    textInputAction: TextInputAction.done,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(15),
+                      label: Text('Phone Number'),
+                    ),
                   ),
-                  const Spacer()
-                ],
-              ),
+                ),
+                const DefaultButton(
+                  label: 'Log in',
+                  route: '',
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: ClipPath(
-              clipper: ClippingClass(),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.amber,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Text(
-                        'OR',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black,
-                        ),
+          ClipPath(
+            clipper: ClippingClass(),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              decoration: const BoxDecoration(
+                color: Colors.amber,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text(
+                      'OR',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black,
                       ),
-                      DefaultButton(
-                        label: 'Sign Up',
-                        route: SignUpScreen.routeName,
-                      )
-                    ],
-                  ),
+                    ),
+                    DefaultButton(
+                      label: 'Sign Up',
+                      route: SignUpScreen.routeName,
+                    )
+                  ],
                 ),
               ),
             ),

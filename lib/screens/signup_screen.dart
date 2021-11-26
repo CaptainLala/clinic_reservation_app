@@ -28,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        padding: EdgeInsets.zero,
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.3,
@@ -37,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(),
-                const Text('Existing User?'),
+                const AutoSizeText('Existing User?'),
                 const SizedBox(
                   height: 25,
                 ),
@@ -52,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.of(context)
                           .pushReplacementNamed(LoginScreen.routeName);
                     },
-                    child: const Text(
+                    child: const AutoSizeText(
                       'LOGIN',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -69,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             clipper: ClippingClass(),
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 70),
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 70),
               decoration: const BoxDecoration(
                 color: Colors.amber,
               ),
@@ -106,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
-                        label: Text('Username'),
+                        label: AutoSizeText('Username'),
                       ),
                     ),
                   ),
@@ -121,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
-                        label: Text('Age'),
+                        label: AutoSizeText('Age'),
                       ),
                     ),
                   ),
@@ -136,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
-                        label: Text('Phone Number'),
+                        label: AutoSizeText('Phone Number'),
                       ),
                     ),
                   ),

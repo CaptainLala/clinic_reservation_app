@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
+import 'package:clinic_reservation_app/widgets/elevated_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,30 +42,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     AutoSizeText(
                       'Welcome to',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 24,
                       ),
                     ),
                     AutoSizeText(
                       'Salahaddin Clinic',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 26,
                       ),
                     ),
                     AutoSizeText(
                       'Please login to continue',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 24,
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: TextField(
+                ElevatedContainer(
+                  color: Theme.of(context).primaryColor,
+                  widget: TextField(
                     keyboardType: TextInputType.phone,
                     controller: _phoneController,
                     textInputAction: TextInputAction.done,

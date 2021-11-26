@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
+import 'package:clinic_reservation_app/widgets/elevated_container.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -34,35 +35,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             height: MediaQuery.of(context).size.height * 0.3,
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Spacer(),
-                const AutoSizeText('Existing User?'),
-                const SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.black,
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(LoginScreen.routeName);
-                    },
-                    child: const AutoSizeText(
-                      'LOGIN',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white),
-                    ),
+              children: const [
+                Spacer(),
+                AutoSizeText(
+                  'Already have an account?',
+                  style: TextStyle(
+                    fontSize: 22,
                   ),
                 ),
-                const Spacer(),
+                SizedBox(
+                  height: 20,
+                ),
+                DefaultButton(
+                  label: 'Log In',
+                  route: LoginScreen.routeName,
+                ),
+                Spacer(),
               ],
             ),
           ),
@@ -84,57 +73,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       AutoSizeText(
                         'Sign up with',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 24,
                         ),
                       ),
                       AutoSizeText(
                         'Salahaddin Clinic',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 26,
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const TextField(
+                  ElevatedContainer(
+                    color: Colors.white,
+                    widget: TextField(
+                      controller: _usernameController,
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
                         label: AutoSizeText('Username'),
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const TextField(
+                  ElevatedContainer(
+                    color: Colors.white,
+                    widget: TextField(
+                      controller: _ageController,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
                         label: AutoSizeText('Age'),
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const TextField(
+                  ElevatedContainer(
+                    color: Colors.white,
+                    widget: TextField(
+                      controller: _phoneController,
                       keyboardType: TextInputType.phone,
                       textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
                         label: AutoSizeText('Phone Number'),

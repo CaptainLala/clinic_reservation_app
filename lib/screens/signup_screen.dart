@@ -3,9 +3,26 @@ import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
-  static const routeName = '/signup-screen';
+class SignUpScreen extends StatefulWidget {
+  static const routeName = '/signup';
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _usernameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _ageController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

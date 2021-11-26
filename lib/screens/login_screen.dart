@@ -1,11 +1,25 @@
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
+import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const routeName = '/login-screen';
+class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +27,7 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               decoration: const BoxDecoration(),
@@ -22,20 +36,30 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Spacer(),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Welcome To'),
-                        Text(
-                          'Salahaddin Clinic',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Welcome To',
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                        Text('please login to continue'),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Salahaddin Clinic',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                      Text(
+                        'Please login to continue',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   Container(
@@ -43,31 +67,21 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      keyboardType: TextInputType.phone,
+                      controller: _phoneController,
+                      textInputAction: TextInputAction.done,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(15),
-                        label: Text('Phone Number '),
+                        label: Text('Phone Number'),
                       ),
                     ),
                   ),
                   const Spacer(),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.black,
-                    ),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Log In',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.white),
-                      ),
-                    ),
+                  const DefaultButton(
+                    label: 'Log in',
+                    route: '',
                   ),
                   const Spacer()
                 ],
@@ -85,8 +99,8 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         'OR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -94,26 +108,10 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Colors.black,
-                        ),
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, SignUpScreen.routeName);
-                          },
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
+                      DefaultButton(
+                        label: 'Sign Up',
+                        route: SignUpScreen.routeName,
+                      )
                     ],
                   ),
                 ),

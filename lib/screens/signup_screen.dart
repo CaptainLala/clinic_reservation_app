@@ -1,9 +1,27 @@
 import 'package:clinic_reservation_app/screens/login_screen.dart';
+import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
-  static const routeName = '/signup-screen';
+class SignUpScreen extends StatefulWidget {
+  static const routeName = '/signup';
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _usernameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _ageController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,33 +34,22 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Spacer(),
-                  const Text('Existing User?'),
-                  const SizedBox(
+                children: const [
+                  Spacer(),
+                  Text(
+                    'Existing User?',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
                     height: 25,
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.black,
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(LoginScreen.routeName);
-                      },
-                      child: const Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.white),
-                      ),
-                    ),
+                  DefaultButton(
+                    label: 'Log In',
+                    route: LoginScreen.routeName,
                   ),
-                  const Spacer(),
+                  Spacer(),
                 ],
               ),
             ),
@@ -66,11 +73,18 @@ class SignUpScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text('Sign up with'),
+                          Text(
+                            'Sign up with',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
                           Text(
                             'Salahaddin Clinic',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ],
                       ),
@@ -80,11 +94,14 @@ class SignUpScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _usernameController,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15),
-                          label: Text('Phone Number '),
+                          label: Text('Username'),
                         ),
                       ),
                     ),
@@ -96,11 +113,14 @@ class SignUpScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: _ageController,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15),
-                          label: Text('Phone Number '),
+                          label: Text('Age'),
                         ),
                       ),
                     ),
@@ -112,33 +132,23 @@ class SignUpScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        keyboardType: TextInputType.phone,
+                        controller: _phoneController,
+                        textInputAction: TextInputAction.done,
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15),
-                          label: Text('Phone Number '),
+                          label: Text('Phone Number'),
                         ),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.black,
-                      ),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                      ),
+                    const DefaultButton(
+                      label: 'Sign Up',
+                      route: '',
                     ),
                     const Spacer()
                   ],

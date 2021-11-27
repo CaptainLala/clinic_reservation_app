@@ -12,10 +12,10 @@ class ElevatedContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(25),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.grey,
-            offset: Offset(5, 5),
+            color: Colors.grey.withOpacity(0.5),
+            offset: const Offset(5, 5),
             blurRadius: 5,
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/elevated_container.dart';
@@ -38,25 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     AutoSizeText(
                       'Welcome to',
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     AutoSizeText(
                       'Salahaddin Clinic',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
-                      ),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                     AutoSizeText(
                       'Please login to continue',
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ],
                 ),
@@ -75,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const DefaultButton(
                   label: 'Log in',
-                  route: '',
+                  route: HomeScreen.routeName,
                 ),
               ],
             ),

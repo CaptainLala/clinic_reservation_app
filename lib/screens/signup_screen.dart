@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/elevated_container.dart';
@@ -36,22 +37,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Spacer(),
+              children: [
+                const Spacer(),
                 AutoSizeText(
                   'Already have an account?',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                DefaultButton(
+                const DefaultButton(
                   label: 'Log In',
                   route: LoginScreen.routeName,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           ),
@@ -69,19 +68,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       AutoSizeText(
                         'Sign up with',
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       AutoSizeText(
                         'Salahaddin Clinic',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 26,
-                        ),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ],
                   ),
@@ -126,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const DefaultButton(
                     label: 'Sign Up',
-                    route: '',
+                    route: HomeScreen.routeName,
                   ),
                 ],
               ),

@@ -43,6 +43,7 @@ class ImageContainer extends StatelessWidget {
                     AutoSizeText(
                       label,
                       maxLines: 2,
+                      minFontSize: 11,
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,

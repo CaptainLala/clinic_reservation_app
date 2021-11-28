@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Color.fromRGBO(37, 41, 88, 1),
         ),
-        title: Text(
+        title: AutoSizeText(
           'Salahaddin Clinic',
           style: Theme.of(context).textTheme.headline2,
         ),
@@ -29,14 +29,14 @@ class HomeScreen extends StatelessWidget {
           horizontal: 15,
         ),
         children: [
-          Text(
+          AutoSizeText(
             'Welcome to Salahaddin Clinic, Receive the Best with Us!',
             style: Theme.of(context).textTheme.headline1,
           ),
           const SizedBox(
             height: 30,
           ),
-          Text(
+          AutoSizeText(
             'How Can We Help You?',
             style: Theme.of(context).textTheme.headline3,
           ),

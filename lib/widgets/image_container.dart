@@ -20,7 +20,7 @@ class ImageContainer extends StatelessWidget {
               top: 30,
               child: Container(
                 padding: const EdgeInsets.all(5),
-                width: 90,
+                width: 93,
                 height: 120,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -42,13 +42,14 @@ class ImageContainer extends StatelessWidget {
                     ),
                     AutoSizeText(
                       label,
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      minFontSize: 11,
+                      minFontSize: 10,
+                      maxFontSize: 12,
                       style: const TextStyle(
-                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                     ),
                   ],
                 ),

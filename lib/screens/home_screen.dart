@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                 width: 30,
               ),
               ImageContainer(
-                label: 'Contact Us',
+                label: 'Contact Us for More',
                 image: 'assets/images/contact.png',
               ),
             ],

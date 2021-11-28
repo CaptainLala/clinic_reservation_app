@@ -11,15 +11,16 @@ class ImageContainer extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: SizedBox(
-        height: 140,
-        width: 110,
+        height: 150,
+        width: 105,
         child: Stack(
           children: [
             Positioned(
               top: 30,
               child: Container(
+                padding: const EdgeInsets.all(5),
                 width: 90,
-                height: 110,
+                height: 120,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
@@ -32,13 +33,30 @@ class ImageContainer extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Text(label),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             Positioned(
               left: 35,
               child: Container(
-                width: 75,
+                width: 70,
                 height: 80,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,

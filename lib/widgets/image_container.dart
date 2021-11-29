@@ -13,7 +13,7 @@ class ImageContainer extends StatelessWidget {
       onTap: () {},
       child: SizedBox(
         height: 150,
-        width: 105,
+        width: 110,
         child: Stack(
           children: [
             Positioned(
@@ -38,18 +38,18 @@ class ImageContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const SizedBox(
-                      height: 40,
+                      height: 35,
                     ),
                     AutoSizeText(
                       label,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      minFontSize: 10,
-                      maxFontSize: 12,
+                      minFontSize: 11,
+                      maxFontSize: 13,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
@@ -58,7 +58,7 @@ class ImageContainer extends StatelessWidget {
             Positioned(
               left: 35,
               child: Container(
-                width: 70,
+                width: 73,
                 height: 80,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,

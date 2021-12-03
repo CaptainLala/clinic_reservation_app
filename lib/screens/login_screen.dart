@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
-import 'package:clinic_reservation_app/widgets/elevated_container.dart';
+import 'package:clinic_reservation_app/widgets/default_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
@@ -54,18 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                ElevatedContainer(
+                DefaultTextField(
+                  keyboardType: TextInputType.phone,
+                  inputAction: TextInputAction.done,
+                  controller: _phoneController,
+                  label: 'Phone Number',
                   color: Theme.of(context).primaryColor,
-                  widget: TextField(
-                    keyboardType: TextInputType.phone,
-                    controller: _phoneController,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(15),
-                      label: Text('Phone Number'),
-                    ),
-                  ),
                 ),
                 const DefaultButton(
                   label: 'Log in',
@@ -78,8 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
             clipper: ClippingClass(),
             child: Container(
               height: MediaQuery.of(context).size.height * 0.3,
-              decoration: const BoxDecoration(
-                color: Colors.amber,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),

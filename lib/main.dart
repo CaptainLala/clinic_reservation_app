@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
         primarySwatch: Colors.blueGrey,
-        primaryColor: Colors.amber,
+        primaryColor: const Color.fromRGBO(108, 180, 238, 1),
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontWeight: FontWeight.bold,
@@ -41,6 +41,11 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(
             fontSize: 20,
             color: Color.fromRGBO(37, 41, 88, 1),
+          ),
+          subtitle1: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
           ),
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
-import 'package:clinic_reservation_app/widgets/elevated_container.dart';
+import 'package:clinic_reservation_app/widgets/default_textfield.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -14,13 +14,13 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _usernameController = TextEditingController();
+  final _fullNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _phoneController = TextEditingController();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _fullNameController.dispose();
     _ageController.dispose();
     _phoneController.dispose();
     super.dispose();
@@ -59,8 +59,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
               padding: const EdgeInsets.only(left: 50, right: 50, top: 70),
-              decoration: const BoxDecoration(
-                color: Colors.amber,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -79,44 +79,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  ElevatedContainer(
+                  DefaultTextField(
+                    keyboardType: TextInputType.text,
+                    inputAction: TextInputAction.next,
+                    controller: _fullNameController,
+                    label: 'Full Name',
                     color: Colors.white,
-                    widget: TextField(
-                      controller: _usernameController,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(15),
-                        label: AutoSizeText('Username'),
-                      ),
-                    ),
                   ),
-                  ElevatedContainer(
+                  DefaultTextField(
+                    keyboardType: TextInputType.number,
+                    inputAction: TextInputAction.next,
+                    controller: _ageController,
+                    label: 'Age',
                     color: Colors.white,
-                    widget: TextField(
-                      controller: _ageController,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(15),
-                        label: AutoSizeText('Age'),
-                      ),
-                    ),
                   ),
-                  ElevatedContainer(
+                  DefaultTextField(
+                    keyboardType: TextInputType.phone,
+                    inputAction: TextInputAction.done,
+                    controller: _phoneController,
+                    label: 'Phone Number',
                     color: Colors.white,
-                    widget: TextField(
-                      controller: _phoneController,
-                      keyboardType: TextInputType.phone,
-                      textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(15),
-                        label: AutoSizeText('Phone Number'),
-                      ),
-                    ),
                   ),
                   const DefaultButton(
                     label: 'Sign Up',

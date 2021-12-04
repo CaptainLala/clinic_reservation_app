@@ -32,7 +32,7 @@ class DefaultTextField extends StatelessWidget {
       child: TextField(
         keyboardType: keyboardType,
         controller: controller,
-        textInputAction: TextInputAction.done,
+        textInputAction: inputAction,
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(15),

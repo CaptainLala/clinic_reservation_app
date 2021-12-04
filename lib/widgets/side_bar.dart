@@ -35,58 +35,64 @@ class SideBar extends StatelessWidget {
               ],
             ),
           ),
-          SideMenuTile(
-            icon: FontAwesomeIcons.home,
-            label: 'Home',
-            onPressed: () => Navigator.pushReplacementNamed(
-              context,
-              HomeScreen.routeName,
-            ),
-          ),
-          SideMenuTile(
-            icon: Icons.person,
-            label: 'Profile',
-            onPressed: () {},
-          ),
-          SideMenuTile(
-            icon: FontAwesomeIcons.calendarCheck,
-            label: 'Appointments',
-            onPressed: () {},
-          ),
-          SideMenuTile(
-            icon: FontAwesomeIcons.info,
-            label: 'About Us',
-            onPressed: () {},
-          ),
-          SideMenuTile(
-            icon: Icons.logout_rounded,
-            label: 'Log Out',
-            onPressed: () => Navigator.pushReplacementNamed(
-              context,
-              LoginScreen.routeName,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Divider(
-            thickness: 1,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                iconSize: 45,
-                color: Colors.blue.shade900,
-                icon: const FaIcon(FontAwesomeIcons.facebook),
+              SideMenuTile(
+                icon: FontAwesomeIcons.home,
+                label: 'Home',
+                onPressed: () => Navigator.pushReplacementNamed(
+                  context,
+                  HomeScreen.routeName,
+                ),
+              ),
+              SideMenuTile(
+                icon: Icons.person,
+                label: 'Profile',
                 onPressed: () {},
               ),
-              IconButton(
-                iconSize: 45,
-                color: const Color.fromRGBO(233, 89, 80, 1),
-                icon: const FaIcon(FontAwesomeIcons.instagram),
+              SideMenuTile(
+                icon: FontAwesomeIcons.calendarCheck,
+                label: 'Appointments',
                 onPressed: () {},
+              ),
+              SideMenuTile(
+                icon: FontAwesomeIcons.info,
+                label: 'About Us',
+                onPressed: () {},
+              ),
+              SideMenuTile(
+                icon: Icons.logout_rounded,
+                label: 'Log Out',
+                onPressed: () => Navigator.pushReplacementNamed(
+                  context,
+                  LoginScreen.routeName,
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 45,
+                    color: Colors.blue.shade900,
+                    icon: const FaIcon(FontAwesomeIcons.facebook),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    iconSize: 45,
+                    color: const Color.fromRGBO(233, 89, 80, 1),
+                    icon: const FaIcon(FontAwesomeIcons.instagram),
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ],
           ),

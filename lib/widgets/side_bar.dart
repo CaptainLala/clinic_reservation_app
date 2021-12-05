@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
+import 'package:clinic_reservation_app/screens/profile_screen.dart';
 import 'package:clinic_reservation_app/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,7 +51,9 @@ class SideBar extends StatelessWidget {
               SideMenuTile(
                 icon: Icons.person,
                 label: 'Profile',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, ProfileScreen.routeName);
+                },
               ),
               SideMenuTile(
                 icon: FontAwesomeIcons.calendarCheck,

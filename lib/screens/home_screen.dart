@@ -4,6 +4,7 @@ import 'package:clinic_reservation_app/widgets/header_title.dart';
 import 'package:clinic_reservation_app/widgets/image_container.dart';
 import 'package:clinic_reservation_app/widgets/side_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -18,18 +19,14 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          icon: Image.asset(
-            'assets/images/drawer_icon.png',
-            height: 30,
-            width: 30,
+          icon: Icon(
+            FontAwesomeIcons.bars,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white10,
-        iconTheme: const IconThemeData(
-          color: Color.fromRGBO(37, 41, 88, 1),
-        ),
         title: AutoSizeText(
           'Salahaddin Clinic',
           style: Theme.of(context).textTheme.headline2,

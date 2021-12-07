@@ -1,71 +1,75 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/widgets/default_textfield.dart';
+import 'package:clinic_reservation_app/widgets/header_title.dart';
 import 'package:clinic_reservation_app/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static const routeName = 'profile_screen';
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final _fullNameController = TextEditingController();
+
+  final _ageController = TextEditingController();
+
+  final _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _ageController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AutoSizeText(
-          'Profile Info',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+        title: AutoSizeText(
+          'Profile',
+          style: Theme.of(context).textTheme.headline2,
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white10,
-        iconTheme: const IconThemeData(
-          color: Color.fromRGBO(37, 41, 88, 1),
-        ),
+        iconTheme: Theme.of(context).iconTheme,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
+        padding: const EdgeInsets.all(15),
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.20,
             child: Image.asset(
-              'assets/images/doctor.png',
+              'assets/images/profile_avatar.png',
               fit: BoxFit.contain,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              AutoSizeText(
-                'Personal Information',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Icon(Icons.person)
-            ],
-          ),
+          const Center(child: HeaderTitle(title: 'Personal Information')),
           const ProfileTextField(
             title: 'Name',
             keyboardType: TextInputType.name,
             inputAction: TextInputAction.done,
             label: 'Name',
-            icon: Icons.person,
           ),
           const ProfileTextField(
             title: 'Phone Number',
             keyboardType: TextInputType.name,
             inputAction: TextInputAction.done,
-            label: '07500000000',
-            icon: Icons.phone,
+            label: 'Phone',
           ),
           const ProfileTextField(
             title: 'Age',
             keyboardType: TextInputType.number,
             inputAction: TextInputAction.done,
             label: 'Age',
-            icon: Icons.access_time_filled_sharp,
           )
         ],
       ),

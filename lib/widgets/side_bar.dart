@@ -68,13 +68,13 @@ class SideBar extends StatelessWidget {
               SideMenuTile(
                 icon: Icons.logout_rounded,
                 label: 'Log Out',
-                onPressed: () => Navigator.pushReplacementNamed(
+                onPressed: () => Navigator.pushNamed(
                   context,
                   LoginScreen.routeName,
                 ),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               const Divider(
                 thickness: 1,

@@ -6,7 +6,6 @@ class ProfileTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextInputAction inputAction;
   final String label;
-  final IconData icon;
 
   const ProfileTextField({
     Key? key,
@@ -14,23 +13,23 @@ class ProfileTextField extends StatelessWidget {
     required this.keyboardType,
     required this.inputAction,
     required this.label,
-    required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeText(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headline3,
           ),
           Container(
+            margin: const EdgeInsets.only(
+              top: 10,
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
@@ -50,7 +49,6 @@ class ProfileTextField extends StatelessWidget {
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(15),
                 label: Text(label),
-                icon: Icon(icon),
               ),
             ),
           ),

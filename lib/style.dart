@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 final ThemeData style = ThemeData(
+  iconTheme: const IconThemeData(
+    color: Color.fromRGBO(37, 41, 88, 1),
+  ),
   fontFamily: 'Poppins',
   primarySwatch: Colors.blueGrey,
   primaryColor: const Color.fromRGBO(108, 180, 238, 1),

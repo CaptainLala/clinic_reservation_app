@@ -13,7 +13,3 @@ class Doctor {
     required this.job,
   });
 }
-
-class Doctors {
-  // ... MANAGE DOCTORS
-}

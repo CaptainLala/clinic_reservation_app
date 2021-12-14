@@ -1,5 +1,5 @@
-import './doctors.dart';
-import './users.dart';
+import 'doctors.dart';
+import 'users.dart';
 
 class Appointment {
   final int id;
@@ -19,8 +19,4 @@ class Appointment {
     required this.status,
     required this.purpose,
   });
-}
-
-class Appointments {
-  // ... MANAGE APPOINTMENTS
 }

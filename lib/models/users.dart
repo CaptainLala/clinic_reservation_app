@@ -11,7 +11,3 @@ class User {
     required this.phone,
   });
 }
-
-class Users {
-  // ... MANAGE USERS
-}

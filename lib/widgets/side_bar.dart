@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/screens/profile_screen.dart';
@@ -67,7 +68,10 @@ class SideBar extends StatelessWidget {
                   SideMenuTile(
                     icon: FontAwesomeIcons.calendarCheck,
                     label: 'Appointments',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, AppointmentsScareen.routeName);
+                    },
                   ),
                   SideMenuTile(
                     icon: FontAwesomeIcons.info,

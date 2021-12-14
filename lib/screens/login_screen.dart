@@ -4,8 +4,6 @@ import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/default_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';

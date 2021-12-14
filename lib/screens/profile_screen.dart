@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clinic_reservation_app/widgets/default_textfield.dart';
 import 'package:clinic_reservation_app/widgets/header_title.dart';
 import 'package:clinic_reservation_app/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = 'profile_screen';

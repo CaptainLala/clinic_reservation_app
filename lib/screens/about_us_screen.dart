@@ -20,7 +20,7 @@ class AboutUsScreen extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

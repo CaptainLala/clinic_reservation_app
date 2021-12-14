@@ -1,3 +1,5 @@
+import 'package:clinic_reservation_app/providers/login_controller.dart';
+import 'package:clinic_reservation_app/providers/singup_controller.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
@@ -7,6 +9,7 @@ import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/style.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,18 +20,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: style,
-      home: const LoginScreen(),
-      routes: {
-        SignUpScreen.routeName: (context) => const SignUpScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        ProfileScreen.routeName: (context) => const ProfileScreen(),
-        AppointmentsScareen.routeName: (compute) => const AppointmentsScareen(),
-        AboutUsScreen.routeName: (context) => const AboutUsScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LoginController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SingupController(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: style,
+        home: const LoginScreen(),
+        routes: {
+          SignUpScreen.routeName: (context) => const SignUpScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          ProfileScreen.routeName: (context) => const ProfileScreen(),
+          AppointmentsScareen.routeName: (compute) =>
+              const AppointmentsScareen(),
+          AboutUsScreen.routeName: (context) => const AboutUsScreen(),
+        },
+      ),
     );
   }
 }

@@ -1,33 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/singup_controller.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/default_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   static const routeName = '/signup';
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  final _fullNameController = TextEditingController();
-  final _ageController = TextEditingController();
-  final _phoneController = TextEditingController();
-
-  @override
-  void dispose() {
-    _fullNameController.dispose();
-    _ageController.dispose();
-    _phoneController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    SingupController _controller = Provider.of<SingupController>(context);
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
@@ -82,21 +68,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultTextField(
                     keyboardType: TextInputType.text,
                     inputAction: TextInputAction.next,
-                    controller: _fullNameController,
+                    controller: _controller.fullNameController,
                     label: 'Full Name',
                     color: Colors.white,
                   ),
                   DefaultTextField(
                     keyboardType: TextInputType.number,
                     inputAction: TextInputAction.next,
-                    controller: _ageController,
+                    controller: _controller.ageController,
                     label: 'Age',
                     color: Colors.white,
                   ),
                   DefaultTextField(
                     keyboardType: TextInputType.phone,
                     inputAction: TextInputAction.done,
-                    controller: _phoneController,
+                    controller: _controller.phoneController,
                     label: 'Phone Number',
                     color: Colors.white,
                   ),

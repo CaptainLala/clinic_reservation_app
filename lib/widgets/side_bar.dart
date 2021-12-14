@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
@@ -76,7 +77,9 @@ class SideBar extends StatelessWidget {
                   SideMenuTile(
                     icon: FontAwesomeIcons.info,
                     label: 'About Us',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AboutUsScreen.routeName);
+                    },
                   ),
                   SideMenuTile(
                     icon: Icons.logout_rounded,

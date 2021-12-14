@@ -3,7 +3,7 @@ import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentsScareen extends StatelessWidget {
-  static const routeName = 'appointments_screen';
+  static const routeName = '/appointments_screen';
   const AppointmentsScareen({Key? key}) : super(key: key);
 
   @override

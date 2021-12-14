@@ -1,3 +1,4 @@
+import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => const HomeScreen(),
         ProfileScreen.routeName: (context) => const ProfileScreen(),
         AppointmentsScareen.routeName: (compute) => const AppointmentsScareen(),
+        AboutUsScreen.routeName: (context) => const AboutUsScreen(),
       },
     );
   }

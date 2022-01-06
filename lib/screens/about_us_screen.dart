@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutUsScreen extends StatelessWidget {
-  static const routeName = '/about_us_screen';
+  static const routeName = '/about-us';
   const AboutUsScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,66 +25,87 @@ class AboutUsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.30,
               height: MediaQuery.of(context).size.height * 0.15,
-              decoration: const BoxDecoration(
-                color: Colors.blue,
-                shape: BoxShape.circle,
+              child: Image.asset(
+                'assets/images/heart.png',
               ),
             ),
             Column(
-              children: const [
-                AutoSizeText('First hair center in erbil'),
+              children: [
                 AutoSizeText(
-                  'with more than 10 years of experince',
+                  'We Are The Best In Town',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                AutoSizeText(
+                  'With more than 10 years of experience!',
                   maxLines: 1,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ],
             ),
             Row(
-              children: const [
-                Icon(Icons.phone),
-                SizedBox(
-                  width: 25,
+              children: [
+                const Icon(Icons.phone),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 25,
+                  ),
+                  child: AutoSizeText(
+                    '07701234567',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
-                AutoSizeText('07504463073'),
               ],
             ),
             Row(
-              children: const [
-                Icon(Icons.mail),
-                SizedBox(
-                  width: 25,
+              children: [
+                const Icon(Icons.mail),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 25,
+                  ),
+                  child: AutoSizeText(
+                    'Send us an email',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
-                AutoSizeText('Send us a message'),
               ],
             ),
             Row(
-              children: const [
-                Icon(Icons.location_city),
-                SizedBox(
-                  width: 25,
+              children: [
+                const Icon(Icons.location_on),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 25,
+                  ),
+                  child: AutoSizeText(
+                    'Find us on the map',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
-                AutoSizeText('Find us on  map'),
               ],
             ),
-            const Divider(
-              color: Colors.red,
+            Divider(
+              color: Theme.of(context).primaryColor,
+              thickness: 1,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 45,
                   onPressed: () {},
+                  color: Colors.blue.shade900,
                   icon: const Icon(
                     FontAwesomeIcons.facebook,
                   ),
                 ),
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 45,
                   onPressed: () {},
+                  color: const Color.fromRGBO(233, 89, 80, 1),
                   icon: const Icon(
                     FontAwesomeIcons.instagram,
                   ),

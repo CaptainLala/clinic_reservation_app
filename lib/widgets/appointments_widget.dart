@@ -7,6 +7,8 @@ class AppointmetnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const List<String> options = ['Edit Appointment', 'Cancel Appointment'];
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.15,
@@ -24,26 +26,61 @@ class AppointmetnWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
-            ),
+          Icon(
+            Icons.timer,
+            size: 50,
+            color: Theme.of(context).iconTheme.color,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              AutoSizeText('visit'),
-              AutoSizeText('October 16 2021'),
-              AutoSizeText('10:00-11:00'),
+            children: [
+              AutoSizeText(
+                'Visit',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              AutoSizeText(
+                'October 16 2021',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              AutoSizeText(
+                '10:00 - 11:00',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
             ],
           ),
-          CupertinoSwitch(
-            value: false,
-            onChanged: (bool value) {},
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: PopupMenuButton<String>(
+              icon: Icon(
+                Icons.more_vert,
+                size: 50,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              itemBuilder: (BuildContext context) {
+                return options.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: choice == 'Cancel Appointment'
+                        ? Text(
+                            choice,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.red,
+                            ),
+                          )
+                        : Text(
+                            choice,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Color.fromRGBO(37, 41, 88, 1),
+                            ),
+                          ),
+                  );
+                }).toList();
+              },
+            ),
           ),
         ],
       ),

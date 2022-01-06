@@ -2,9 +2,14 @@ import 'package:clinic_reservation_app/providers/login_controller.dart';
 import 'package:clinic_reservation_app/providers/singup_controller.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
+import 'package:clinic_reservation_app/screens/doctors_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
+import 'package:clinic_reservation_app/screens/location_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
+import 'package:clinic_reservation_app/screens/monthly_board_screen.dart';
+import 'package:clinic_reservation_app/screens/products_screen.dart';
 import 'package:clinic_reservation_app/screens/profile_screen.dart';
+import 'package:clinic_reservation_app/screens/request_appointment_screen.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/style.dart';
 
@@ -41,6 +46,12 @@ class MyApp extends StatelessWidget {
           AppointmentsScareen.routeName: (compute) =>
               const AppointmentsScareen(),
           AboutUsScreen.routeName: (context) => const AboutUsScreen(),
+          ProductsScreen.routeName: (context) => const ProductsScreen(),
+          LocationScreen.routeName: (context) => const LocationScreen(),
+          MonthlyBoardScreen.routeName: (context) => const MonthlyBoardScreen(),
+          RequestAppointmentScreen.routeName: (context) =>
+              const RequestAppointmentScreen(),
+          DoctorsScreen.routeName: (context) => const DoctorsScreen(),
         },
       ),
     );

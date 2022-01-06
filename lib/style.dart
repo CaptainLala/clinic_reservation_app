@@ -24,11 +24,11 @@ final ThemeData style = ThemeData(
       color: Color.fromRGBO(37, 41, 88, 1),
     ),
     bodyText1: TextStyle(
-      fontSize: 22,
+      fontSize: 24,
       color: Color.fromRGBO(37, 41, 88, 1),
     ),
     bodyText2: TextStyle(
-      fontSize: 20,
+      fontSize: 22,
       color: Color.fromRGBO(37, 41, 88, 1),
     ),
     subtitle1: TextStyle(

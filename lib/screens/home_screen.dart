@@ -1,4 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/about_us_screen.dart';
+import 'package:clinic_reservation_app/screens/doctors_screen.dart';
+import 'package:clinic_reservation_app/screens/location_screen.dart';
+import 'package:clinic_reservation_app/screens/monthly_board_screen.dart';
+import 'package:clinic_reservation_app/screens/products_screen.dart';
+import 'package:clinic_reservation_app/screens/request_appointment_screen.dart';
 import 'package:clinic_reservation_app/widgets/category_card.dart';
 import 'package:clinic_reservation_app/widgets/header_title.dart';
 import 'package:clinic_reservation_app/widgets/image_container.dart';
@@ -50,10 +56,12 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               ImageContainer(
+                path: RequestAppointmentScreen.routeName,
                 label: 'Request Appointment',
                 image: 'assets/images/appointment.png',
               ),
               ImageContainer(
+                path: DoctorsScreen.routeName,
                 label: 'See Our Doctors',
                 image: 'assets/images/doctor.png',
               ),
@@ -75,18 +83,22 @@ class HomeScreen extends StatelessWidget {
             ),
             children: const [
               CategoryCard(
+                path: ProductsScreen.routeName,
                 title: 'Our Products',
                 image: 'assets/images/bottle.png',
               ),
               CategoryCard(
+                path: LocationScreen.routeName,
                 title: 'Our Location',
                 image: 'assets/images/location.png',
               ),
               CategoryCard(
+                path: AboutUsScreen.routeName,
                 title: 'Contact Us',
                 image: 'assets/images/contact.png',
               ),
               CategoryCard(
+                path: MonthlyBoardScreen.routeName,
                 title: 'Monthly Board',
                 image: 'assets/images/money_graph.png',
               ),

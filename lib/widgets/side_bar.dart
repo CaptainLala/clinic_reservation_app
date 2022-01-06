@@ -16,7 +16,7 @@ class SideBar extends StatelessWidget {
     return Drawer(
       child: SizedBox(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
+        height: double.infinity,
         child: Column(
           children: [
             Expanded(

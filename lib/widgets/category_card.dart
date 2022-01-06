@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 class CategoryCard extends StatelessWidget {
   final String title;
   final String image;
-  const CategoryCard({Key? key, required this.title, required this.image})
+  final String path;
+  const CategoryCard(
+      {Key? key, required this.title, required this.image, required this.path})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, path);
+      },
       borderRadius: BorderRadius.circular(25),
       child: Container(
         margin: const EdgeInsets.all(10),

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class ImageContainer extends StatelessWidget {
   final String label;
   final String image;
-  const ImageContainer({Key? key, required this.label, required this.image})
+  final String path;
+  const ImageContainer(
+      {Key? key, required this.label, required this.image, required this.path})
       : super(key: key);
 
   @override
@@ -13,7 +15,9 @@ class ImageContainer extends StatelessWidget {
       padding: const EdgeInsets.only(right: 30),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, path);
+        },
         child: SizedBox(
           height: 150,
           width: 110,

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
-import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
+import 'package:clinic_reservation_app/screens/appointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/screens/profile_screen.dart';
@@ -37,7 +37,7 @@ class SideBar extends StatelessWidget {
                       scale: 3.5,
                     ),
                     AutoSizeText(
-                      'Hamno Jabbar',
+                      'Glena Emdad',
                       style: Theme.of(context).textTheme.headline2,
                     ),
                   ],
@@ -71,7 +71,7 @@ class SideBar extends StatelessWidget {
                     label: 'Appointments',
                     onPressed: () {
                       Navigator.pushNamed(
-                          context, AppointmentsScareen.routeName);
+                          context, AppointmentsScreen.routeName);
                     },
                   ),
                   SideMenuTile(

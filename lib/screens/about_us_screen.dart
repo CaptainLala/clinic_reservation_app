@@ -87,8 +87,8 @@ class AboutUsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(
-              color: Theme.of(context).primaryColor,
+            const Divider(
+              color: Color.fromRGBO(37, 41, 88, 1),
               thickness: 1,
             ),
             Row(

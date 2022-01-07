@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class AppointmetnWidget extends StatelessWidget {
-  const AppointmetnWidget({Key? key}) : super(key: key);
+class DemoAppointment extends StatelessWidget {
+  const DemoAppointment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const List<String> options = ['Edit Appointment', 'Cancel Appointment'];
+    const List<String> options = ['Request Appointment'];
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -31,23 +31,23 @@ class AppointmetnWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
-            Icons.timer,
+            Icons.done,
             size: 50,
-            color: Theme.of(context).iconTheme.color,
+            color: Colors.green.shade500,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AutoSizeText(
-                'Visit',
+                'Emergency',
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               AutoSizeText(
-                'March 10 2022',
+                'October 16 2021',
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               AutoSizeText(
-                '10:00 - 11:00',
+                '12:00 - 1:00',
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ],
@@ -64,21 +64,13 @@ class AppointmetnWidget extends StatelessWidget {
                 return options.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: choice == 'Cancel Appointment'
-                        ? Text(
-                            choice,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.red,
-                            ),
-                          )
-                        : Text(
-                            choice,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Color.fromRGBO(37, 41, 88, 1),
-                            ),
-                          ),
+                    child: Text(
+                      choice,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(37, 41, 88, 1),
+                      ),
+                    ),
                   );
                 }).toList();
               },

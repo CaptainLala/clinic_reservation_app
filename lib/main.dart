@@ -1,7 +1,8 @@
+import 'package:clinic_reservation_app/providers/doctors_provider.dart';
 import 'package:clinic_reservation_app/providers/login_controller.dart';
 import 'package:clinic_reservation_app/providers/singup_controller.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
-import 'package:clinic_reservation_app/screens/apoointments_screen.dart';
+import 'package:clinic_reservation_app/screens/appointments_screen.dart';
 import 'package:clinic_reservation_app/screens/doctors_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/location_screen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SingupController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorsProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,8 +47,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.routeName: (context) => const LoginScreen(),
           HomeScreen.routeName: (context) => const HomeScreen(),
           ProfileScreen.routeName: (context) => const ProfileScreen(),
-          AppointmentsScareen.routeName: (compute) =>
-              const AppointmentsScareen(),
+          AppointmentsScreen.routeName: (compute) => const AppointmentsScreen(),
           AboutUsScreen.routeName: (context) => const AboutUsScreen(),
           ProductsScreen.routeName: (context) => const ProductsScreen(),
           LocationScreen.routeName: (context) => const LocationScreen(),

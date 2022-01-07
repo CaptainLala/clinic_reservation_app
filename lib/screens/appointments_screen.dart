@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
+import 'package:clinic_reservation_app/widgets/demo_appointment.dart';
 import 'package:flutter/material.dart';
 
-class AppointmentsScareen extends StatelessWidget {
+class AppointmentsScreen extends StatelessWidget {
   static const routeName = '/appointments_screen';
-  const AppointmentsScareen({Key? key}) : super(key: key);
+  const AppointmentsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,13 @@ class AppointmentsScareen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
-          vertical: 10,
+          vertical: 5,
           horizontal: 10,
         ),
-        children: const [AppointmetnWidget()],
+        children: const [
+          AppointmetnWidget(),
+          DemoAppointment(),
+        ],
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:clinic_reservation_app/widgets/appointment_doctor.dart';
 import 'package:clinic_reservation_app/widgets/appointment_time.dart';
 import 'package:clinic_reservation_app/widgets/appointment_type.dart';
 import 'package:clinic_reservation_app/widgets/calendar.dart';
-import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 
 class RequestAppointmentScreen extends StatelessWidget {
@@ -26,7 +25,7 @@ class RequestAppointmentScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: 15,
-          vertical: 15,
+          vertical: 10,
         ),
         children: [
           const Calendar(),

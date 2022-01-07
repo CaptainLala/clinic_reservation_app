@@ -35,9 +35,9 @@ class ImageContainer extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
-                        offset: const Offset(2, 2),
-                        blurRadius: 3,
-                        spreadRadius: 3,
+                        offset: const Offset(3, 3),
+                        blurRadius: 5,
+                        spreadRadius: 2,
                       ),
                     ],
                   ),
@@ -73,8 +73,8 @@ class ImageContainer extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
-                        offset: const Offset(2, 2),
-                        blurRadius: 2,
+                        offset: const Offset(3, 3),
+                        blurRadius: 5,
                         spreadRadius: 2,
                       ),
                     ],

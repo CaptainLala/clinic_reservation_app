@@ -1,5 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/doctors_provider.dart';
+import 'package:clinic_reservation_app/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DoctorsScreen extends StatelessWidget {
   static const routeName = '/doctors';
@@ -7,6 +10,7 @@ class DoctorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doctors = Provider.of<DoctorsProvider>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
@@ -17,6 +21,18 @@ class DoctorsScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white10,
         iconTheme: Theme.of(context).iconTheme,
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
+        itemCount: doctors.length,
+        itemBuilder: (context, index) {
+          return DoctorCard(
+            doctor: doctors[index],
+          );
+        },
       ),
     );
   }

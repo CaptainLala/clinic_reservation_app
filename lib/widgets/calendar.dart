@@ -22,9 +22,22 @@ class _CalendarState extends State<Calendar> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2025),
     );
+
     if (picked != null && picked != selectedDate) {
+      if (DateTime.now().month == picked.month &&
+          DateTime.now().year == picked.year &&
+          DateTime.now().day == picked.day) {
+        setState(() {
+          selectedDate = picked;
+          currentDateSelectedIndex = 0;
+        });
+        return;
+      }
+
+      final int dateDifference = (picked.difference(DateTime.now()).inDays) + 1;
       setState(() {
         selectedDate = picked;
+        currentDateSelectedIndex = dateDifference;
       });
     }
   }

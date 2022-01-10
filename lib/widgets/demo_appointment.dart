@@ -6,7 +6,7 @@ class DemoAppointment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> options = ['Request Appointment'];
+    const List<String> options = ['View Details'];
 
     return Container(
       width: MediaQuery.of(context).size.width,

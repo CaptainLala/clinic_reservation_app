@@ -11,10 +11,21 @@ class BarChartWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.black54,
+        color: const Color.fromRGBO(37, 41, 88, 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            offset: const Offset(3, 3),
+            blurRadius: 5,
+            spreadRadius: 2,
+          ),
+        ],
       ),
       child: BarChart(
         BarChartData(
+          gridData: FlGridData(
+            show: false,
+          ),
           alignment: BarChartAlignment.spaceAround,
           maxY: 1500,
           minY: 0,
@@ -56,19 +67,19 @@ class BarChartWidget extends StatelessWidget {
               getTitles: (double value) {
                 switch (value.toInt()) {
                   case 0:
-                    return '5/20';
+                    return '7/21';
                   case 1:
-                    return '6/20';
+                    return '8/21';
                   case 2:
-                    return '7/20';
+                    return '9/21';
                   case 3:
-                    return '8/20';
+                    return '10/21';
                   case 4:
-                    return '9/20';
+                    return '11/21';
                   case 5:
-                    return '10/20';
+                    return '12/21';
                   case 6:
-                    return '11/20';
+                    return '1/22';
                   default:
                     return '';
                 }
@@ -84,9 +95,9 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 1000,
+                  y: 946,
                   width: 20,
-                  colors: [Colors.amber],
+                  colors: [Colors.white],
                 ),
               ],
             ),
@@ -95,9 +106,9 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 500,
+                  y: 780,
                   width: 20,
-                  colors: [Colors.amber],
+                  colors: [Colors.white],
                 ),
               ],
             ),
@@ -106,9 +117,9 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 300,
+                  y: 555,
                   width: 20,
-                  colors: [Colors.amber],
+                  colors: [Colors.white],
                 ),
               ],
             ),
@@ -117,7 +128,7 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 800,
+                  y: 768,
                   width: 20,
                   colors: [Colors.amber],
                 ),
@@ -128,9 +139,9 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 900,
+                  y: 450,
                   width: 20,
-                  colors: [Colors.amber],
+                  colors: [Colors.white],
                 ),
               ],
             ),
@@ -139,9 +150,9 @@ class BarChartWidget extends StatelessWidget {
               showingTooltipIndicators: [0],
               barRods: [
                 BarChartRodData(
-                  y: 1000,
+                  y: 670,
                   width: 20,
-                  colors: [Colors.amber],
+                  colors: [Colors.white],
                 ),
               ],
             )

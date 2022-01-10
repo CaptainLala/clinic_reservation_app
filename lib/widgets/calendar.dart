@@ -21,6 +21,19 @@ class _CalendarState extends State<Calendar> {
       initialDate: selectedDate,
       firstDate: DateTime.now(),
       lastDate: DateTime(2025),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData().copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: Color.fromRGBO(37, 41, 88, 1),
+              onPrimary: Colors.white,
+              surface: Colors.white,
+              onSurface: Color.fromRGBO(37, 41, 88, 1),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null && picked != selectedDate) {

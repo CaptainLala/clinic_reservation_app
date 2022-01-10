@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/widgets/bar_chart_widget.dart';
+import 'package:clinic_reservation_app/widgets/demo_appointment.dart';
 import 'package:flutter/material.dart';
 
 class MonthlyBoardScreen extends StatelessWidget {
@@ -24,9 +25,22 @@ class MonthlyBoardScreen extends StatelessWidget {
           vertical: 15,
           horizontal: 15,
         ),
-        child: Column(
-          children: const [
-            BarChartWidget(),
+        child: ListView(
+          children: [
+            const BarChartWidget(),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                bottom: 15,
+              ),
+              child: AutoSizeText(
+                'Appointments:',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            const DemoAppointment(),
+            const DemoAppointment(),
+            const DemoAppointment(),
           ],
         ),
       ),

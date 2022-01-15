@@ -129,6 +129,7 @@ class _CalendarState extends State<Calendar> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
+                  borderRadius: BorderRadius.circular(8),
                   onTap: () {
                     setState(() {
                       currentDateSelectedIndex = index;

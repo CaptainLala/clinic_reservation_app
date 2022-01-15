@@ -53,14 +53,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const Center(child: HeaderTitle(title: 'Personal Information')),
           const ProfileTextField(
             title: 'Name',
-            keyboardType: TextInputType.name,
-            inputAction: TextInputAction.done,
+            keyboardType: TextInputType.text,
+            inputAction: TextInputAction.next,
             label: 'Name',
           ),
           const ProfileTextField(
             title: 'Phone Number',
-            keyboardType: TextInputType.name,
-            inputAction: TextInputAction.done,
+            keyboardType: TextInputType.phone,
+            inputAction: TextInputAction.next,
             label: 'Phone',
           ),
           const ProfileTextField(

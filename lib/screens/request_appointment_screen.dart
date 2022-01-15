@@ -33,8 +33,8 @@ class RequestAppointmentScreen extends StatelessWidget {
           const AppointmentDoctor(),
           const AppointmentType(),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 15,
+            padding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.height * 0.04,
             ),
             child: Center(
               child: ElevatedButton(

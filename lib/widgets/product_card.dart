@@ -23,7 +23,7 @@ class ProductCard extends StatelessWidget {
                 horizontal: 15,
                 vertical: 5,
               ),
-              height: 200,
+              height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -40,8 +40,8 @@ class ProductCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const SizedBox(
-                    height: 45,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.06,
                   ),
                   AutoSizeText(
                     product.name,

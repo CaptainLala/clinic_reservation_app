@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/auth.dart';
 import 'package:clinic_reservation_app/providers/login_controller.dart';
-import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/default_textfield.dart';
@@ -50,9 +50,38 @@ class LoginScreen extends StatelessWidget {
                   label: 'Phone Number',
                   color: Theme.of(context).primaryColor,
                 ),
-                const DefaultButton(
-                  label: 'Log in',
-                  route: HomeScreen.routeName,
+                //change here !!
+                ElevatedButton(
+                  onPressed: () async {
+                    final data = Provider.of<Auth>(context, listen: false);
+                    await data.signIn(
+                      context,
+                      '_phoneController.text',
+                      '_passwordController.text',
+                    );
+                  },
+                  child: const Text(
+                    'Log in',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(
+                      Size(
+                        MediaQuery.of(context).size.width,
+                        50,
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

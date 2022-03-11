@@ -9,6 +9,7 @@ import 'package:clinic_reservation_app/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -85,13 +86,18 @@ class SideBar extends StatelessWidget {
                     },
                   ),
                   SideMenuTile(
-                    icon: Icons.logout_rounded,
-                    label: 'Log Out',
-                    onPressed: () => Navigator.pushNamed(
-                      context,
-                      LoginScreen.routeName,
-                    ),
-                  ),
+                      icon: Icons.logout_rounded,
+                      label: 'Log Out',
+                      onPressed: () async {
+                        SharedPreferences _prefs =
+                            await SharedPreferences.getInstance();
+                        _prefs.remove('token');
+                        _prefs.remove('isLoggedIn');
+                        Navigator.pushNamed(
+                          context,
+                          LoginScreen.routeName,
+                        );
+                      }),
                 ],
               ),
             ),

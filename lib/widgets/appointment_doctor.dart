@@ -9,7 +9,8 @@ class AppointmentDoctor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final doctors = Provider.of<DoctorsProvider>(context, listen: false).items;
+    final doctors =
+        Provider.of<DoctorsProvider>(context, listen: false).doctors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

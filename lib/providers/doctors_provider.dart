@@ -1,37 +1,34 @@
 import 'package:clinic_reservation_app/models/doctors.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsProvider with ChangeNotifier {
-  final List<Doctor> _doctors = [
-    Doctor(
-      id: 1,
-      username: 'panam.dentist',
-      image: 'assets/images/doctor_1.jpg',
-      name: 'Dr. Panam Kivash',
-      age: 37,
-      phone: '07701324567',
-      position: 'Dentist',
-    ),
-    Doctor(
-      id: 2,
-      username: 'rico.surgeon',
-      image: 'assets/images/doctor_2.jpg',
-      name: 'Dr. Rico Junior',
-      age: 31,
-      phone: '07702344567',
-      position: 'Surgeon',
-    ),
-    Doctor(
-      id: 3,
-      username: 'lia.doctor',
-      image: 'assets/images/doctor_3.jpg',
-      name: 'Dr. Lia Jones',
-      age: 42,
-      phone: '07705431787',
-      position: 'Physician',
-    ),
-  ];
-  List<Doctor> get items {
+  Dio dio = Dio();
+  List<Doctor> _doctors = [];
+
+  List<Doctor> get doctors {
     return [..._doctors];
+  }
+
+  void addDoctor(List<Doctor> docs) {
+    _doctors = docs;
+    notifyListeners();
+  }
+
+  Future getAllDoctors() async {
+    try {
+      Response res = await dio.get('http://127.0.0.1:3000/api/doc/');
+      if (res.statusCode == 200) {
+        List<Doctor> docs = [];
+
+        // print(res.data);
+        for (var data in res.data['doctors']) {
+          docs.add(Doctor.fromJson(data));
+        }
+        _doctors = docs;
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -1,5 +1,5 @@
 class Doctor {
-  final int id;
+  final String id;
   final String username;
   final String name;
   final String image;
@@ -16,4 +16,16 @@ class Doctor {
     required this.phone,
     required this.position,
   });
+
+  factory Doctor.fromJson(Map<String, dynamic> json) {
+    return Doctor(
+      id: json['_id'],
+      username: json['name'],
+      image: 'assets/images/doctor_2.jpg',
+      age: 12,
+      phone: json['phone'],
+      position: 'surgeon',
+      name: json['name'],
+    );
+  }
 }

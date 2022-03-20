@@ -13,7 +13,7 @@ class Auth with ChangeNotifier {
       Response res = await dio.post(
         'http://127.0.0.1:3000/api/users/signin',
         data: {
-          'email': '1@2.com',
+          'phone': '1234567890',
           'password': '12345678',
         },
       );

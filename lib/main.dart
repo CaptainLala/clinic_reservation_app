@@ -1,3 +1,4 @@
+import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/providers/auth.dart';
 import 'package:clinic_reservation_app/providers/doctors_provider.dart';
 import 'package:clinic_reservation_app/providers/login_controller.dart';
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AppointmentsProvider(),
         ),
       ],
       child: MaterialApp(

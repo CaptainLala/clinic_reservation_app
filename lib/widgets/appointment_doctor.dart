@@ -38,12 +38,10 @@ class AppointmentDoctor extends StatelessWidget {
           buttonLables: [
             doctors[0].name,
             doctors[1].name,
-            doctors[2].name,
           ],
           buttonValues: [
             doctors[0].id,
             doctors[1].id,
-            doctors[2].id,
           ],
           elevation: 5,
           enableShape: true,

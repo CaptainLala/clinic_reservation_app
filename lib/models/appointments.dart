@@ -1,13 +1,12 @@
 import 'doctors.dart';
-import 'users.dart';
 
 class Appointment {
-  final int id;
-  final DateTime date;
-  final DateTime time;
+  final String id;
+  final String date;
+  final String time;
   final Doctor doctor;
-  final User user;
-  final String status; // ... Pending, Done
+  final String user;
+  final bool status; // ... Pending, Done
   final String purpose; // ... Plazma, Visit
 
   Appointment({
@@ -19,4 +18,16 @@ class Appointment {
     required this.status,
     required this.purpose,
   });
+
+  factory Appointment.fromJson(Map<String, dynamic> json) {
+    return Appointment(
+      id: json['_id'],
+      date: json['date'],
+      time: json['time'],
+      doctor: Doctor.fromJson(json['doctor']),
+      user: json['user'],
+      status: json['status'],
+      purpose: json['purpose'],
+    );
+  }
 }

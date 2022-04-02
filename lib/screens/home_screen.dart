@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/doctors_provider.dart';
 import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/doctors_screen.dart';
@@ -22,7 +23,8 @@ class HomeScreen extends StatelessWidget {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     final List<Future<dynamic>> promise = [
       Provider.of<UserProvider>(context, listen: false)
-          .getUser(context, _prefs.getString('token')!)
+          .getUser(context, _prefs.getString('token')!),
+      Provider.of<DoctorsProvider>(context, listen: false).getAllDoctors()
     ];
     return Future.wait(promise);
   }

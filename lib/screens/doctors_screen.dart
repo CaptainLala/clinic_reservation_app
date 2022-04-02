@@ -10,13 +10,6 @@ class DoctorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<dynamic> initRequest(context) async {
-      final List<Future<dynamic>> promise = [
-        Provider.of<DoctorsProvider>(context, listen: false).getAllDoctors()
-      ];
-      return Future.wait(promise);
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
@@ -28,31 +21,20 @@ class DoctorsScreen extends StatelessWidget {
         backgroundColor: Colors.white10,
         iconTheme: Theme.of(context).iconTheme,
       ),
-      body: FutureBuilder(
-        future: initRequest(context),
-        builder: (context, snap) {
-          if (snap.hasData) {
-            return Consumer<DoctorsProvider>(
-              builder: (context, provider, _) {
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
-                  ),
-                  itemCount: provider.doctors.length,
-                  itemBuilder: (context, index) {
-                    return DoctorCard(
-                      doctor: provider.doctors[index],
-                    );
-                  },
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: Consumer<DoctorsProvider>(
+        builder: (context, provider, _) {
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
+            itemCount: provider.doctors.length,
+            itemBuilder: (context, index) {
+              return DoctorCard(
+                doctor: provider.doctors[index],
+              );
+            },
+          );
         },
       ),
     );

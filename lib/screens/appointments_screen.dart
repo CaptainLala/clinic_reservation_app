@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
-import 'package:clinic_reservation_app/widgets/demo_appointment.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentsScreen extends StatelessWidget {
   static const routeName = '/appointments_screen';
@@ -9,6 +10,14 @@ class AppointmentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<dynamic> initRequest(context) async {
+      final List<Future<dynamic>> promise = [
+        Provider.of<AppointmentsProvider>(context, listen: false)
+            .getUserAppointments()
+      ];
+      return Future.wait(promise);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
@@ -20,15 +29,32 @@ class AppointmentsScreen extends StatelessWidget {
         backgroundColor: Colors.white10,
         iconTheme: Theme.of(context).iconTheme,
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 5,
-          horizontal: 10,
-        ),
-        children: const [
-          AppointmetnWidget(),
-          DemoAppointment(),
-        ],
+      body: FutureBuilder(
+        future: initRequest(context),
+        builder: (context, snap) {
+          if (snap.hasData) {
+            return Consumer<AppointmentsProvider>(
+              builder: (context, provider, _) {
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    return AppointmetnWidget(
+                      appo: provider.appo[index],
+                    );
+                  },
+                  itemCount: provider.appo.length,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 10,
+                  ),
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

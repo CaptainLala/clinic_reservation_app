@@ -20,7 +20,9 @@ class Auth with ChangeNotifier {
 
       if (res.statusCode == 200) {
         String token = res.data['token'];
+        String userId = res.data['user']['_id'];
         _prefs.setString('token', token);
+        _prefs.setString('userId', userId);
         _prefs.setBool('isLoggedIn', true);
         Navigator.pushNamedAndRemoveUntil(
           context,

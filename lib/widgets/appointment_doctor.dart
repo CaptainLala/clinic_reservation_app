@@ -1,16 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clinic_reservation_app/providers/doctors_provider.dart';
+import 'package:clinic_reservation_app/models/doctors.dart';
+import 'package:clinic_reservation_app/providers/date_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 
 class AppointmentDoctor extends StatelessWidget {
-  const AppointmentDoctor({Key? key}) : super(key: key);
+  final List<Doctor> docs;
+
+  const AppointmentDoctor({Key? key, required this.docs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final doctors =
-        Provider.of<DoctorsProvider>(context, listen: false).doctors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,19 +36,17 @@ class AppointmentDoctor extends StatelessWidget {
             ),
           ),
           unSelectedColor: Colors.white,
-          buttonLables: [
-            doctors[0].name,
-            doctors[1].name,
-          ],
-          buttonValues: [
-            doctors[0].id,
-            doctors[1].id,
-          ],
+          buttonLables: docs.map((e) => e.name).toList(),
+          buttonValues: docs.map((e) => e.id).toList(),
           elevation: 5,
           enableShape: true,
           radius: 15,
           shapeRadius: 15,
-          radioButtonValue: (_) {},
+          radioButtonValue: (val) {
+            Provider.of<DateSelector>(context, listen: false).assignDocId(
+              val.toString(),
+            );
+          },
           spacing: 5,
           horizontal: false,
           enableButtonWrap: false,

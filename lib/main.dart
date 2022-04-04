@@ -1,8 +1,10 @@
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/providers/auth.dart';
+import 'package:clinic_reservation_app/providers/date_selector.dart';
 import 'package:clinic_reservation_app/providers/doctors_provider.dart';
 import 'package:clinic_reservation_app/providers/login_controller.dart';
 import 'package:clinic_reservation_app/providers/products_provider.dart';
+import 'package:clinic_reservation_app/providers/request_appointment_provider.dart';
 import 'package:clinic_reservation_app/providers/singup_controller.dart';
 import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
@@ -53,6 +55,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AppointmentsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RequestAppointmentProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DateSelector(),
         ),
       ],
       child: MaterialApp(

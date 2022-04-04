@@ -29,4 +29,21 @@ class AppointmentsProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  Future createAppointment(
+      String docId, String userId, String date, String time) async {
+    try {
+      Response res = await dio.post('http://127.0.0.1:3000/api/appo', data: {
+        "doctor": docId,
+        "user": userId,
+        "time": time,
+        "date": date,
+      });
+      if (res.statusCode == 201) {
+        _appo.add(Appointment.fromJson(res.data['appo']));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/appointments_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
@@ -7,12 +8,15 @@ import 'package:clinic_reservation_app/screens/profile_screen.dart';
 import 'package:clinic_reservation_app/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Drawer(
       child: SizedBox(
         width: double.infinity,
@@ -37,7 +41,7 @@ class SideBar extends StatelessWidget {
                       scale: 3.5,
                     ),
                     AutoSizeText(
-                      'Glena Emdad',
+                      user!.username,
                       style: Theme.of(context).textTheme.headline2,
                     ),
                   ],
@@ -82,13 +86,18 @@ class SideBar extends StatelessWidget {
                     },
                   ),
                   SideMenuTile(
-                    icon: Icons.logout_rounded,
-                    label: 'Log Out',
-                    onPressed: () => Navigator.pushNamed(
-                      context,
-                      LoginScreen.routeName,
-                    ),
-                  ),
+                      icon: Icons.logout_rounded,
+                      label: 'Log Out',
+                      onPressed: () async {
+                        SharedPreferences _prefs =
+                            await SharedPreferences.getInstance();
+                        _prefs.remove('token');
+                        _prefs.remove('isLoggedIn');
+                        Navigator.pushNamed(
+                          context,
+                          LoginScreen.routeName,
+                        );
+                      }),
                 ],
               ),
             ),

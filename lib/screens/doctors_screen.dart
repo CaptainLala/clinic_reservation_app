@@ -10,7 +10,6 @@ class DoctorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final doctors = Provider.of<DoctorsProvider>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
@@ -22,15 +21,19 @@ class DoctorsScreen extends StatelessWidget {
         backgroundColor: Colors.white10,
         iconTheme: Theme.of(context).iconTheme,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 20,
-        ),
-        itemCount: doctors.length,
-        itemBuilder: (context, index) {
-          return DoctorCard(
-            doctor: doctors[index],
+      body: Consumer<DoctorsProvider>(
+        builder: (context, provider, _) {
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
+            itemCount: provider.doctors.length,
+            itemBuilder: (context, index) {
+              return DoctorCard(
+                doctor: provider.doctors[index],
+              );
+            },
           );
         },
       ),

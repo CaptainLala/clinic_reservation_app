@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/models/appointments.dart';
 import 'package:flutter/material.dart';
 
 class AppointmetnWidget extends StatelessWidget {
-  const AppointmetnWidget({Key? key}) : super(key: key);
+  final Appointment appo;
+  const AppointmetnWidget({Key? key, required this.appo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +41,15 @@ class AppointmetnWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AutoSizeText(
-                'Visit',
+                appo.purpose,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               AutoSizeText(
-                'March 10 2022',
+                appo.date,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               AutoSizeText(
-                '10:00 - 11:00',
+                appo.time,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ],

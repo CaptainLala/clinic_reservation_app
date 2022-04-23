@@ -15,20 +15,20 @@ class DoctorsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future getAllDoctors() async {
+  Future<List<Doctor>> getAllDoctors() async {
     try {
       Response res = await dio.get('http://127.0.0.1:3000/api/doc/');
+      List<Doctor> docs = [];
       if (res.statusCode == 200) {
-        List<Doctor> docs = [];
-
         // print(res.data);
         for (var data in res.data['doctors']) {
           docs.add(Doctor.fromJson(data));
         }
         _doctors = docs;
       }
+      return docs;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 }

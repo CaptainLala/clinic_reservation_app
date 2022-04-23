@@ -13,16 +13,17 @@ class RequestAppointmentProvider with ChangeNotifier {
     _requestAppointmen = data;
   }
 
-  Future getMonthAppointment(int date) async {
+  Future<RequestAppointmentModel?> getMonthAppointment(int date) async {
     try {
       Response res = await dio.get('http://127.0.0.1:3000/api/available/$date');
+      RequestAppointmentModel? tempData;
       if (res.statusCode == 200) {
-        RequestAppointmentModel tempData =
-            RequestAppointmentModel.fromJson(res.data['available']);
+        tempData = RequestAppointmentModel.fromJson(res.data['available']);
         addData(tempData);
       }
+      return tempData;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -32,6 +33,7 @@ class RequestAppointmentProvider with ChangeNotifier {
           data: {'date': date, 'time': time, 'id': docId});
     } catch (e) {
       print(e);
+      rethrow;
     }
   }
 

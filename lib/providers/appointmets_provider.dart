@@ -12,21 +12,22 @@ class AppointmentsProvider with ChangeNotifier {
     return [..._appo];
   }
 
-  Future getUserAppointments() async {
+  Future<List<Appointment>> getUserAppointments() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String userId = _prefs.getString('userId')!;
     try {
       Response res =
           await dio.get('http://127.0.0.1:3000/api/appo/user/$userId');
+      List<Appointment> appos = [];
       if (res.statusCode == 200) {
-        List<Appointment> appos = [];
         for (var data in res.data['appointments']) {
           appos.add(Appointment.fromJson(data));
         }
         _appo = appos;
       }
+      return appos;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -43,7 +44,7 @@ class AppointmentsProvider with ChangeNotifier {
         _appo.add(Appointment.fromJson(res.data['appo']));
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 }

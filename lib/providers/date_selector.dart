@@ -33,7 +33,7 @@ class DateSelector with ChangeNotifier {
     return [..._allDates];
   }
 
-  Future getAllDates() async {
+  Future<List<String>> getAllDates() async {
     try {
       Response res =
           await dio.get('http://127.0.0.1:3000/api/available/date/all');
@@ -42,8 +42,9 @@ class DateSelector with ChangeNotifier {
         tempData.add(data['date']);
       }
       _allDates = tempData;
+      return tempData;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 

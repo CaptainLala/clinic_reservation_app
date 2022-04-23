@@ -1,3 +1,4 @@
+import 'package:clinic_reservation_app/firebase_options.dart';
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/providers/auth.dart';
 import 'package:clinic_reservation_app/providers/date_selector.dart';
@@ -20,11 +21,13 @@ import 'package:clinic_reservation_app/screens/request_appointment_screen.dart';
 import 'package:clinic_reservation_app/screens/signup_screen.dart';
 import 'package:clinic_reservation_app/screens/spash_screen.dart';
 import 'package:clinic_reservation_app/style.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

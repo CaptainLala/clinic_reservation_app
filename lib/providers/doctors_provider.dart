@@ -1,4 +1,5 @@
 import 'package:clinic_reservation_app/models/doctors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +18,23 @@ class DoctorsProvider with ChangeNotifier {
 
   Future<List<Doctor>> getAllDoctors() async {
     try {
-      Response res = await dio.get('http://127.0.0.1:3000/api/doc/');
-      List<Doctor> docs = [];
-      if (res.statusCode == 200) {
-        // print(res.data);
-        for (var data in res.data['doctors']) {
-          docs.add(Doctor.fromJson(data));
-        }
-        _doctors = docs;
-      }
-      return docs;
+      var collection = await FirebaseFirestore.instance
+          .collection('users')
+          .where('role', isEqualTo: 'doctor')
+          .get();
+      List<Doctor> tempData = [];
+      collection.docs
+          .map(
+            (e) => tempData.add(
+              Doctor.fromJson(e.data()),
+            ),
+          )
+          .toList();
+
+      _doctors = tempData;
+      return tempData;
     } catch (e) {
+      print(e);
       rethrow;
     }
   }

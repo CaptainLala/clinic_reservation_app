@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/auth.dart';
 import 'package:clinic_reservation_app/providers/singup_controller.dart';
-import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
 import 'package:clinic_reservation_app/widgets/default_button.dart';
 import 'package:clinic_reservation_app/widgets/default_textfield.dart';
@@ -86,10 +86,39 @@ class SignUpScreen extends StatelessWidget {
                     label: 'Phone Number',
                     color: Colors.white,
                   ),
-                  const DefaultButton(
-                    label: 'Sign Up',
-                    route: HomeScreen.routeName,
-                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Auth auth = Auth();
+                      auth.signUp(
+                        context,
+                        _controller.fullNameController.text,
+                        _controller.phoneController.text,
+                        int.parse(_controller.ageController.text),
+                      );
+                    },
+                    child: const Text(
+                      'Sing Up',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white),
+                    ),
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(
+                        Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

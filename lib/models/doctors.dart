@@ -19,11 +19,11 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
-      id: json['_id'],
+      id: json['uid'],
       username: json['name'],
       image: 'assets/images/doctor_2.jpg',
       age: 12,
-      phone: json['phone'],
+      phone: json['phoneNo'],
       position: 'surgeon',
       name: json['name'],
     );

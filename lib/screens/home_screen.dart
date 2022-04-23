@@ -14,17 +14,14 @@ import 'package:clinic_reservation_app/widgets/side_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
   const HomeScreen({Key? key}) : super(key: key);
   Future<dynamic> initRequest(context) async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
     final List<Future<dynamic>> promise = [
-      Provider.of<UserProvider>(context, listen: false)
-          .getUser(context, _prefs.getString('token')!),
-      Provider.of<DoctorsProvider>(context, listen: false).getAllDoctors()
+      Provider.of<UserProvider>(context, listen: false).getUser(context),
+      Provider.of<DoctorsProvider>(context, listen: false).getAllDoctors(),
     ];
     return Future.wait(promise);
   }

@@ -6,16 +6,18 @@ import 'package:clinic_reservation_app/widgets/appointment_doctor.dart';
 import 'package:clinic_reservation_app/widgets/appointment_time.dart';
 import 'package:clinic_reservation_app/widgets/appointment_type.dart';
 import 'package:clinic_reservation_app/widgets/calendar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RequestAppointmentScreen extends StatelessWidget {
   static const routeName = '/request-appointment';
+
   const RequestAppointmentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance;
     int? date = Provider.of<DateSelector>(context).selectedDate;
 
     Future<dynamic> initRequest(context) async {
@@ -45,7 +47,8 @@ class RequestAppointmentScreen extends StatelessWidget {
           if (snap.hasData) {
             return Consumer3<RequestAppointmentProvider, DateSelector,
                 AppointmentsProvider>(
-              builder: (context, provider1, provider2, provider3, _) {
+              builder: (context, requestProvider, dateProvider,
+                  appointmentProvider, _) {
                 return ListView(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,
@@ -54,9 +57,9 @@ class RequestAppointmentScreen extends StatelessWidget {
                   children: [
                     const Calendar(),
                     AppointmentTime(
-                      time: provider1.requestAppointment!.time!,
-                    ),
-                    AppointmentDoctor(docs: provider1.requestAppointment!.doc),
+                        time: requestProvider.requestAppointment!.time),
+                    AppointmentDoctor(
+                        docs: requestProvider.requestAppointment!.time),
                     const AppointmentType(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -65,22 +68,23 @@ class RequestAppointmentScreen extends StatelessWidget {
                       child: Center(
                         child: ElevatedButton(
                           onPressed: () async {
-                            SharedPreferences _prefs =
-                                await SharedPreferences.getInstance();
-                            if (provider2.selectedDate != null &&
-                                provider2.selecredTime != null &&
-                                provider2.docId != null) {
-                              provider1.deleteAvailable(
-                                '${provider2.selectedDate}',
-                                provider2.selecredTime!,
-                                provider2.docId!,
+                            if (dateProvider.selectedDate != null &&
+                                dateProvider.selecredTime != null &&
+                                dateProvider.docId != null) {
+                              // requestProvider.deleteAvailable(
+                              //   '${dateProvider.selectedDate}',
+                              //   dateProvider.selecredTime!,
+                              //   dateProvider.docId!,
+                              // );
+                              appointmentProvider.createAppointment(
+                                dateProvider.docId!,
+                                user.currentUser!.uid,
+                                '${dateProvider.selectedDate!}',
+                                dateProvider.selecredTime!,
+                                dateProvider.purpose!,
+                                false,
                               );
-                              provider3.createAppointment(
-                                provider2.docId!,
-                                _prefs.getString('userId')!,
-                                '${provider2.selectedDate}',
-                                provider2.selecredTime!,
-                              );
+
                               Navigator.pop(context);
                             }
                           },

@@ -1,25 +1,63 @@
-import 'package:clinic_reservation_app/models/doctors.dart';
+// import 'package:intl/intl.dart';
 
 class RequestAppointmentModel {
   String? date;
-  List<String>? time;
-  List<Doctor> doc;
+  List<Time> time;
 
   RequestAppointmentModel({
     required this.date,
     required this.time,
-    required this.doc,
   });
   factory RequestAppointmentModel.fromJson(Map<String, dynamic> json) {
-    List<dynamic> timeJson = json['time'];
-    List<dynamic> doctorJson = json['doctors'];
-    // converting the dynamic list to String !!
-    List<String> times = timeJson.map((e) => e.toString()).toList();
-    List<Doctor> doctors = doctorJson.map((e) => Doctor.fromJson(e)).toList();
+    var timeJson = json['time'];
+    // Timestamp dateJson = json['date'];
+
+    // DateTime date =
+    //     DateTime.fromMicrosecondsSinceEpoch(dateJson.microsecondsSinceEpoch);
+
+    // var dateString = DateFormat.d().format(date);
+
+    List<Time> time = [];
+
+    for (var data in timeJson) {
+      time.add(Time.fromJson(data));
+    }
     return RequestAppointmentModel(
       date: json['date'],
-      time: times,
-      doc: doctors,
+      time: time,
+    );
+  }
+}
+
+class Time {
+  String time;
+  List<Docs> docs;
+
+  Time({required this.time, required this.docs});
+
+  factory Time.fromJson(Map<String, dynamic> json) {
+    var docsJson = json['docs'];
+    List<Docs> docs = [];
+    for (var data in docsJson) {
+      docs.add(Docs.fromJson(data));
+    }
+    return Time(
+      time: json['time'],
+      docs: docs,
+    );
+  }
+}
+
+class Docs {
+  String id;
+  String name;
+
+  Docs({required this.id, required this.name});
+
+  factory Docs.fromJson(Map<String, dynamic> json) {
+    return Docs(
+      id: json['uid'],
+      name: json['name'],
     );
   }
 }

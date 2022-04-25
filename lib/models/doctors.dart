@@ -22,7 +22,7 @@ class Doctor {
       id: json['uid'],
       username: json['name'],
       image: 'assets/images/doctor_2.jpg',
-      age: 12,
+      age: json['age'],
       phone: json['phoneNo'],
       position: 'surgeon',
       name: json['name'],

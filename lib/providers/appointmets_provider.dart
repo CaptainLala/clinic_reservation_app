@@ -1,10 +1,11 @@
 import 'package:clinic_reservation_app/models/appointments.dart';
-import 'package:dio/dio.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentsProvider with ChangeNotifier {
-  Dio dio = Dio();
+  final db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance;
 
   List<Appointment> _appo = [];
 
@@ -13,36 +14,60 @@ class AppointmentsProvider with ChangeNotifier {
   }
 
   Future<List<Appointment>> getUserAppointments() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    String userId = _prefs.getString('userId')!;
     try {
-      Response res =
-          await dio.get('http://127.0.0.1:3000/api/appo/user/$userId');
-      List<Appointment> appos = [];
-      if (res.statusCode == 200) {
-        for (var data in res.data['appointments']) {
-          appos.add(Appointment.fromJson(data));
-        }
-        _appo = appos;
-      }
-      return appos;
+      List<Appointment> tempData = [];
+
+      var _collection = await db
+          .collection('appointments')
+          .where(
+            'uid',
+            isEqualTo: user.currentUser!.uid,
+          )
+          .get();
+
+      _collection.docs
+          .map(
+            (e) => tempData.add(
+              Appointment.fromJson(
+                e.data(),
+              ),
+            ),
+          )
+          .toList();
+      _appo = tempData;
+      return tempData;
     } catch (e) {
+      print(e);
       rethrow;
     }
   }
 
-  Future createAppointment(
-      String docId, String userId, String date, String time) async {
+  Future createAppointment(String docId, String userId, String date,
+      String time, String purpose, bool status) async {
     try {
-      Response res = await dio.post('http://127.0.0.1:3000/api/appo', data: {
-        "doctor": docId,
-        "user": userId,
-        "time": time,
+      await db
+          .collection('appointments')
+          .doc('${user.currentUser!.uid}_$date')
+          .set({
         "date": date,
+        "docid": docId,
+        "purpose": purpose,
+        "status": false,
+        "time": time,
+        "uid": user.currentUser!.uid
       });
-      if (res.statusCode == 201) {
-        _appo.add(Appointment.fromJson(res.data['appo']));
-      }
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future deleteAppointment(String date) async {
+    try {
+      db
+          .collection('appointments')
+          .doc('${user.currentUser!.uid}_$date')
+          .delete();
     } catch (e) {
       rethrow;
     }

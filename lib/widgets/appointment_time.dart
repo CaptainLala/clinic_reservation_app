@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/models/request_appointment_model.dart';
 import 'package:clinic_reservation_app/providers/date_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:provider/provider.dart';
 
 class AppointmentTime extends StatelessWidget {
-  final List<String> time;
+  final List<Time> time;
   const AppointmentTime({Key? key, required this.time}) : super(key: key);
 
   @override
@@ -34,14 +35,14 @@ class AppointmentTime extends StatelessWidget {
             ),
           ),
           unSelectedColor: Colors.white,
-          buttonLables: time,
-          buttonValues: time,
+          buttonLables: time.map((e) => e.time).toList(),
+          buttonValues: time.map((e) => e.time).toList(),
           elevation: 5,
           enableShape: true,
           radius: 15,
           shapeRadius: 15,
           radioButtonValue: (value) {
-            Provider.of<DateSelector>(context, listen: false).addignTime(
+            Provider.of<DateSelector>(context, listen: false).assignTime(
               value.toString(),
             );
           },

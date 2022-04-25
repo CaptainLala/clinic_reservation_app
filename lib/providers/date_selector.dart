@@ -1,29 +1,45 @@
-import 'package:dio/dio.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class DateSelector with ChangeNotifier {
-  Dio dio = Dio();
+  var db = FirebaseFirestore.instance;
 
   int? _selectedDate;
   String? _selecredTime;
   String? _docId;
+  String? _purpose;
+  String? _docName;
 
   int? get selectedDate => _selectedDate;
   String? get selecredTime => _selecredTime;
   String? get docId => _docId;
+  String? get purpose => _purpose;
+  String? get docName => _docName;
 
   void assignDate(String date) {
     _selecredTime = date;
     notifyListeners();
   }
 
-  void addignTime(String time) {
+  void assignTime(String time) {
     _selecredTime = time;
     notifyListeners();
   }
 
   void assignDocId(String id) {
     _docId = id;
+
+    notifyListeners();
+  }
+
+  void assignPurpose(String purpose) {
+    _purpose = purpose;
+
+    notifyListeners();
+  }
+
+  void assignDocName(String docName) {
+    _docName = docName;
     notifyListeners();
   }
 
@@ -35,12 +51,15 @@ class DateSelector with ChangeNotifier {
 
   Future<List<String>> getAllDates() async {
     try {
-      Response res =
-          await dio.get('http://127.0.0.1:3000/api/available/date/all');
+      var _collection = await db.collection('available').get();
       List<String> tempData = [];
-      for (var data in res.data['avail']) {
-        tempData.add(data['date']);
-      }
+      _collection.docs
+          .map(
+            (e) => tempData.add(
+              e.data()['date'],
+            ),
+          )
+          .toList();
       _allDates = tempData;
       return tempData;
     } catch (e) {

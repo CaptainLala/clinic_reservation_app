@@ -29,7 +29,7 @@ class Auth with ChangeNotifier {
       BuildContext context, String name, String phoneNo, int age) async {
     try {
       var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: '2@3.com',
+        email: '3@4.com',
         password: '12345678',
       );
       if (user.user != null) {

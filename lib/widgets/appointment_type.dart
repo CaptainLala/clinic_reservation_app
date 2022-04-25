@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/date_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentType extends StatelessWidget {
   const AppointmentType({Key? key}) : super(key: key);
@@ -53,7 +55,11 @@ class AppointmentType extends StatelessWidget {
           enableShape: true,
           radius: 15,
           shapeRadius: 15,
-          radioButtonValue: (_) {},
+          radioButtonValue: (val) {
+            Provider.of<DateSelector>(context, listen: false).assignPurpose(
+              val.toString().toLowerCase(),
+            );
+          },
           spacing: 5,
           horizontal: false,
           enableButtonWrap: false,

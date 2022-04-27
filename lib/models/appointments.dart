@@ -1,7 +1,6 @@
 class Appointment {
   final String date;
   final String time;
-
   final String userId;
   final String docId;
   final bool status; // ... Pending, Done

@@ -29,7 +29,7 @@ class RequestAppointmentProvider with ChangeNotifier {
       // getDoctorsWithTime(25, '9:00');
       return tempData;
     } catch (e) {
-      // print(e);
+      print(e);
       rethrow;
     }
   }
@@ -40,15 +40,16 @@ class RequestAppointmentProvider with ChangeNotifier {
       var _collection =
           await db.collection('available/$date/docs').doc(time).get();
 
-      var data = _collection.data()!['docs'];
+      var data = _collection.data();
       List<RequestDocModel>? tempData = [];
 
-      for (var field in data) {
-        tempData.add(RequestDocModel.fromJson(field));
-      }
+      data!.forEach((key, value) {
+        if (value['isReserved'] == false) {
+          tempData.add(RequestDocModel.fromJson(value));
+        }
+      });
 
       _requestDoctors = tempData;
-      // print(_requestDoctors[0]!.name);
       return tempData;
     } catch (e) {
       print(e);

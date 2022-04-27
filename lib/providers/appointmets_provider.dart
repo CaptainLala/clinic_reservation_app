@@ -47,7 +47,7 @@ class AppointmentsProvider with ChangeNotifier {
     try {
       await db
           .collection('appointments')
-          .doc('${user.currentUser!.uid}_$date')
+          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
           .set({
         "date": date,
         "docid": docId,
@@ -56,18 +56,28 @@ class AppointmentsProvider with ChangeNotifier {
         "time": time,
         "uid": user.currentUser!.uid
       });
+
+      await db
+          .collection('available/$date/docs')
+          .doc(time)
+          .update({"$docId.isReserved": true});
     } catch (e) {
       print(e);
       rethrow;
     }
   }
 
-  Future deleteAppointment(String date) async {
+  Future deleteAppointment(String date, String time, String docId) async {
     try {
       db
           .collection('appointments')
-          .doc('${user.currentUser!.uid}_$date')
+          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
           .delete();
+
+      await db
+          .collection('available/$date/docs')
+          .doc(time)
+          .update({"$docId.isReserved": false});
     } catch (e) {
       rethrow;
     }

@@ -37,7 +37,7 @@ class AppointmentDoctor extends StatelessWidget {
           ),
           unSelectedColor: Colors.white,
           buttonLables: docs.map((e) => e!.name).toList(),
-          buttonValues: docs.map((e) => e!.name).toList(),
+          buttonValues: docs.map((e) => e!.uid).toList(),
           elevation: 5,
           enableShape: true,
           radius: 15,

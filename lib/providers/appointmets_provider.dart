@@ -73,12 +73,12 @@ class AppointmentsProvider with ChangeNotifier {
           .collection('appointments')
           .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
           .delete();
-
       await db
           .collection('available/$date/docs')
           .doc(time)
           .update({"$docId.isReserved": false});
     } catch (e) {
+      print(e);
       rethrow;
     }
   }

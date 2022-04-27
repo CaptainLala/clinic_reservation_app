@@ -1,16 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clinic_reservation_app/models/request_appointment_model.dart';
 import 'package:clinic_reservation_app/providers/date_selector.dart';
+import 'package:clinic_reservation_app/providers/request_appointment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:provider/provider.dart';
 
 class AppointmentTime extends StatelessWidget {
-  final List<Time> time;
+  final List<String> time;
   const AppointmentTime({Key? key, required this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var date = Provider.of<DateSelector>(context, listen: false);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,16 +36,18 @@ class AppointmentTime extends StatelessWidget {
             ),
           ),
           unSelectedColor: Colors.white,
-          buttonLables: time.map((e) => e.time).toList(),
-          buttonValues: time.map((e) => e.time).toList(),
+          buttonLables: time,
+          buttonValues: time,
           elevation: 5,
           enableShape: true,
           radius: 15,
           shapeRadius: 15,
           radioButtonValue: (value) {
-            Provider.of<DateSelector>(context, listen: false).assignTime(
+            date.assignTime(
               value.toString(),
             );
+            Provider.of<RequestAppointmentProvider>(context, listen: false)
+                .getDoctorsWithTime(date.selectedDate!, value.toString());
           },
           spacing: 5,
           horizontal: false,

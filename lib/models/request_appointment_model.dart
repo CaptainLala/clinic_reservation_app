@@ -1,63 +1,37 @@
 // import 'package:intl/intl.dart';
 
-class RequestAppointmentModel {
+class RequestTimeModel {
   String? date;
-  List<Time> time;
+  List<String> time;
 
-  RequestAppointmentModel({
+  RequestTimeModel({
     required this.date,
     required this.time,
   });
-  factory RequestAppointmentModel.fromJson(Map<String, dynamic> json) {
-    var timeJson = json['time'];
-    // Timestamp dateJson = json['date'];
+  factory RequestTimeModel.fromJson(Map<String, dynamic> json) {
+    List<dynamic> timeJson = json['time'];
 
-    // DateTime date =
-    //     DateTime.fromMicrosecondsSinceEpoch(dateJson.microsecondsSinceEpoch);
-
-    // var dateString = DateFormat.d().format(date);
-
-    List<Time> time = [];
-
-    for (var data in timeJson) {
-      time.add(Time.fromJson(data));
+    List<String> timeString = [];
+    for (var time in timeJson) {
+      timeString.add(time.toString());
     }
-    return RequestAppointmentModel(
+    return RequestTimeModel(
       date: json['date'],
-      time: time,
+      time: timeString,
     );
   }
 }
 
-class Time {
-  String time;
-  List<Docs> docs;
-
-  Time({required this.time, required this.docs});
-
-  factory Time.fromJson(Map<String, dynamic> json) {
-    var docsJson = json['docs'];
-    List<Docs> docs = [];
-    for (var data in docsJson) {
-      docs.add(Docs.fromJson(data));
-    }
-    return Time(
-      time: json['time'],
-      docs: docs,
-    );
-  }
-}
-
-class Docs {
-  String id;
+class RequestDocModel {
   String name;
+  String uid;
 
-  Docs({required this.id, required this.name});
+  RequestDocModel({required this.name, required this.uid});
 
-  factory Docs.fromJson(Map<String, dynamic> json) {
-    return Docs(
-      id: json['uid'],
+  factory RequestDocModel.fromJson(Map<String, dynamic> json) {
+    return RequestDocModel(
       name: json['name'],
+      uid: json['uid'],
     );
   }
 }

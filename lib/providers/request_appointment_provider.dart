@@ -1,66 +1,58 @@
 import 'package:clinic_reservation_app/models/request_appointment_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class RequestAppointmentProvider with ChangeNotifier {
-  Dio dio = Dio();
+  final db = FirebaseFirestore.instance;
 
-  RequestAppointmentModel? _requestAppointmen;
+  RequestTimeModel? _requestModel;
 
-  RequestAppointmentModel? get requestAppointment => _requestAppointmen;
+  RequestTimeModel? get requestModel => _requestModel;
 
-  void addData(RequestAppointmentModel? data) {
-    _requestAppointmen = data;
+  List<RequestDocModel?> _requestDoctors = [];
+
+  List<RequestDocModel?> get requestDoctors {
+    return [..._requestDoctors];
   }
 
-  Future<RequestAppointmentModel?> getMonthAppointment(int date) async {
+  Future<RequestTimeModel?> getTime(int date) async {
     try {
-      RequestAppointmentModel? tempData;
-      var _collection = await FirebaseFirestore.instance
-          .collection('available')
-          .where('date', isEqualTo: '$date')
-          .get();
+      var _collection = await db.collection('available').doc('$date').get();
 
-      _collection.docs
-          .map(
-            (e) => tempData = RequestAppointmentModel.fromJson(e.data()),
-          )
-          .toList();
+      RequestTimeModel? tempData;
 
-      addData(tempData);
+      tempData =
+          RequestTimeModel.fromJson(_collection.data() as Map<String, dynamic>);
+
+      _requestModel = tempData;
+
+      // getDoctorsWithTime(25, '9:00');
       return tempData;
     } catch (e) {
+      // print(e);
       rethrow;
     }
   }
 
-  Future deleteAvailable(String date, String time, String docId) async {
+  Future<List<RequestDocModel>?> getDoctorsWithTime(
+      int date, String time) async {
     try {
-      await dio.patch('http://127.0.0.1:3000/api/available',
-          data: {'date': date, 'time': time, 'id': docId});
+      var _collection =
+          await db.collection('available/$date/docs').doc(time).get();
+
+      var data = _collection.data()!['docs'];
+      List<RequestDocModel>? tempData = [];
+
+      for (var field in data) {
+        tempData.add(RequestDocModel.fromJson(field));
+      }
+
+      _requestDoctors = tempData;
+      // print(_requestDoctors[0]!.name);
+      return tempData;
     } catch (e) {
       print(e);
       rethrow;
     }
   }
-
-  // Future getAllAvailableAppoint() async {
-  //   try {
-  //     Response res = await dio.get('http://127.0.0.1:3000/api/available');
-  //     if (res.statusCode == 200) {
-  //       List<RequestAppointmentModel> tempData = [];
-  //       for (var data in res.data['available']) {
-  //         tempData.add(
-  //           RequestAppointmentModel.fromJson(data),
-  //         );
-  //       }
-
-  //       _requestAppointment = tempData;
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
 }

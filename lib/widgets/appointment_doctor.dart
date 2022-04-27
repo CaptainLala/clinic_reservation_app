@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 
 class AppointmentDoctor extends StatelessWidget {
-  final List<Time> docs;
+  final List<RequestDocModel?> docs;
 
   const AppointmentDoctor({Key? key, required this.docs}) : super(key: key);
 
@@ -36,8 +36,8 @@ class AppointmentDoctor extends StatelessWidget {
             ),
           ),
           unSelectedColor: Colors.white,
-          buttonLables: docs.map((e) => e.docs[0].name).toList(),
-          buttonValues: docs.map((e) => e.docs[0].id).toList(),
+          buttonLables: docs.map((e) => e!.name).toList(),
+          buttonValues: docs.map((e) => e!.name).toList(),
           elevation: 5,
           enableShape: true,
           radius: 15,

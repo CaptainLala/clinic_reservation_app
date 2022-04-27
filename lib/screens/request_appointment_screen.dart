@@ -23,9 +23,8 @@ class RequestAppointmentScreen extends StatelessWidget {
     Future<dynamic> initRequest(context) async {
       final List<Future<dynamic>> promise = [
         Provider.of<DateSelector>(context).getAllDates(),
-        Provider.of<RequestAppointmentProvider>(context).getMonthAppointment(
-          date ?? DateTime.now().day.toInt(),
-        )
+        Provider.of<RequestAppointmentProvider>(context, listen: false)
+            .getTime(date ?? DateTime.now().day)
       ];
       return Future.wait(promise);
     }
@@ -56,10 +55,8 @@ class RequestAppointmentScreen extends StatelessWidget {
                   ),
                   children: [
                     const Calendar(),
-                    AppointmentTime(
-                        time: requestProvider.requestAppointment!.time),
-                    AppointmentDoctor(
-                        docs: requestProvider.requestAppointment!.time),
+                    AppointmentTime(time: requestProvider.requestModel!.time),
+                    AppointmentDoctor(docs: requestProvider.requestDoctors),
                     const AppointmentType(),
                     Padding(
                       padding: const EdgeInsets.symmetric(

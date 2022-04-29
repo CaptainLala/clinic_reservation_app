@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/models/appointments.dart';
+import 'package:clinic_reservation_app/models/users.dart';
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
+import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/request_appointment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +13,7 @@ class AppointmetnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> options = ['Edit Appointment', 'Cancel Appointment'];
-
+    UserModel doctor = Provider.of<UserProvider>(context).user!;
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.15,

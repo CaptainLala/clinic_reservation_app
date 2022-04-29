@@ -12,7 +12,6 @@ class UserProvider with ChangeNotifier {
 
   void addUser(UserModel data) {
     _user = data;
-    notifyListeners();
   }
 
   Future<UserModel?> getUser(BuildContext context) async {

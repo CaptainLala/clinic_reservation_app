@@ -67,6 +67,18 @@ class AppointmentsProvider with ChangeNotifier {
     }
   }
 
+  Future updateStatus(String date, String time, String docId) async {
+    try {
+      await db
+          .collection('appointments')
+          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
+          .update({"status": true});
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future deleteAppointment(String date, String time, String docId) async {
     try {
       db

@@ -11,6 +11,7 @@ import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/appointments_screen.dart';
 import 'package:clinic_reservation_app/screens/doctors_screen.dart';
+import 'package:clinic_reservation_app/screens/emergency_screen.dart';
 import 'package:clinic_reservation_app/screens/home_screen.dart';
 import 'package:clinic_reservation_app/screens/location_screen.dart';
 import 'package:clinic_reservation_app/screens/login_screen.dart';
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
           RequestAppointmentScreen.routeName: (context) =>
               const RequestAppointmentScreen(),
           DoctorsScreen.routeName: (context) => const DoctorsScreen(),
+          EmergencyScreen.routeName: (context) => const EmergencyScreen(),
         },
       ),
     );

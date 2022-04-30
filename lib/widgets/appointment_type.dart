@@ -34,7 +34,6 @@ class AppointmentType extends StatelessWidget {
           ),
           unSelectedColor: Colors.white,
           buttonLables: const [
-            'Emergency',
             'Visit',
             'Revist',
             'Blood Test',
@@ -43,7 +42,6 @@ class AppointmentType extends StatelessWidget {
             'Monitoring',
           ],
           buttonValues: const [
-            'Emergency',
             'Visit',
             'Revisit',
             'Blood Test',

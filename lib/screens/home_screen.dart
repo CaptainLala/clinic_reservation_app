@@ -3,6 +3,7 @@ import 'package:clinic_reservation_app/providers/doctors_provider.dart';
 import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/screens/about_us_screen.dart';
 import 'package:clinic_reservation_app/screens/doctors_screen.dart';
+import 'package:clinic_reservation_app/screens/emergency_screen.dart';
 import 'package:clinic_reservation_app/screens/location_screen.dart';
 import 'package:clinic_reservation_app/screens/monthly_board_screen.dart';
 import 'package:clinic_reservation_app/screens/products_screen.dart';
@@ -66,20 +67,29 @@ class HomeScreen extends StatelessWidget {
                   thickness: 1,
                 ),
                 const HeaderTitle(title: 'How Can We Help You?'),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    ImageContainer(
-                      path: RequestAppointmentScreen.routeName,
-                      label: 'Request Appointment',
-                      image: 'assets/images/appointment.png',
-                    ),
-                    ImageContainer(
-                      path: DoctorsScreen.routeName,
-                      label: 'See Our Doctors',
-                      image: 'assets/images/doctor.png',
-                    ),
-                  ],
+                SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.215,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: const [
+                      ImageContainer(
+                        path: RequestAppointmentScreen.routeName,
+                        label: 'Request Appointment',
+                        image: 'assets/images/appointment.png',
+                      ),
+                      ImageContainer(
+                        path: EmergencyScreen.routeName,
+                        label: 'Request Emergency',
+                        image: 'assets/images/emergency.png',
+                      ),
+                      ImageContainer(
+                        path: DoctorsScreen.routeName,
+                        label: 'See Our Doctors',
+                        image: 'assets/images/doctor.png',
+                      ),
+                    ],
+                  ),
                 ),
                 const HeaderTitle(title: 'Categories'),
                 GridView(

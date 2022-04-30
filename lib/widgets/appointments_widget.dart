@@ -70,8 +70,6 @@ class AppointmetnWidget extends StatelessWidget {
                 if (val == 0) {
                   Navigator.pushNamed(
                       context, RequestAppointmentScreen.routeName);
-                } else if (val == 1) {
-                  Navigator.pop(context);
                 }
               },
               itemBuilder: (BuildContext context) => [
@@ -91,6 +89,20 @@ class AppointmetnWidget extends StatelessWidget {
                 ),
                 PopupMenuItem(
                   value: 1,
+                  child: Text(
+                    "Appointment Done",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.green.shade500,
+                    ),
+                  ),
+                  onTap: () {
+                    Provider.of<AppointmentsProvider>(context, listen: false)
+                        .deleteAppointment(appo.date, appo.time, appo.docId);
+                  },
+                ),
+                PopupMenuItem(
+                  value: 2,
                   child: const Text(
                     "Cancel Appointment",
                     style: TextStyle(
@@ -99,8 +111,54 @@ class AppointmetnWidget extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Provider.of<AppointmentsProvider>(context, listen: false)
-                        .deleteAppointment(appo.date, appo.time, appo.docId);
+                    Future.delayed(
+                      const Duration(seconds: 0),
+                      () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30.0),
+                            ),
+                          ),
+                          title: Text(
+                            'Cancel Appointment',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          content: Text(
+                            'Would you like to cancel this appointment?',
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'No'),
+                              child: Text(
+                                'No',
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Provider.of<AppointmentsProvider>(context,
+                                        listen: false)
+                                    .deleteAppointment(
+                                        appo.date, appo.time, appo.docId);
+                                Navigator.pop(context, 'Yes');
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                'Yes',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],

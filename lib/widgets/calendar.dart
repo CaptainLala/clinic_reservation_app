@@ -12,7 +12,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  DateTime selectedDate = DateTime.now(); // TO tracking date
+  late DateTime selectedDate; // TO tracking date
 
   int currentDateSelectedIndex = 0; //For Horizontal Date
   ScrollController scrollController = ScrollController(); //To Track Scroll of ListView
@@ -31,58 +31,41 @@ class _CalendarState extends State<Calendar> {
     }
   }
 
-  List<String> listOfMonths = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  List<String> listOfDays = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun",
-  ];
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = Provider.of<DateSelector>(context, listen: false).allDates.isNotEmpty
+        ? DateTime.parse(Provider.of<DateSelector>(context, listen: false).allDates[0])
+        : DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Choose A Date',
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-            IconButton(
-              onPressed: () {
-                _selectDate(context);
-              },
-              icon: const FaIcon(
-                FontAwesomeIcons.calendar,
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Text(
+        //       'Choose A Date',
+        //       style: Theme.of(context).textTheme.bodyText2,
+        //     ),
+        //     IconButton(
+        //       onPressed: () {
+        //         _selectDate(context);
+        //       },
+        //       icon: const FaIcon(
+        //         FontAwesomeIcons.calendar,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         //To Show Current Date
         Container(
           height: 50,
           alignment: Alignment.centerLeft,
           child: Text(
-            selectedDate.day.toString() + '-' + listOfMonths[selectedDate.month - 1] + ', ' + selectedDate.year.toString(),
+            '${selectedDate.day}-${DateFormat.MMMM().format(selectedDate)}, ${DateFormat.E().format(selectedDate)}',
             style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
@@ -102,13 +85,13 @@ class _CalendarState extends State<Calendar> {
                 controller: scrollController,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
+                  //!date
+                  final String date = provider.allDates[index];
                   return InkWell(
                     onTap: () {
                       setState(() {
                         currentDateSelectedIndex = index;
-                        selectedDate = DateTime.now().add(
-                          Duration(days: index),
-                        );
+                        selectedDate = DateTime.parse(date);
                       });
 
                       provider.changeDate(
@@ -136,13 +119,7 @@ class _CalendarState extends State<Calendar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            listOfMonths[DateTime.now()
-                                        .add(
-                                          Duration(days: index),
-                                        )
-                                        .month -
-                                    1]
-                                .toString(),
+                            DateFormat.MMMM().format(DateTime.parse(date)),
                             style: TextStyle(
                               fontSize: 16,
                               color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,
@@ -152,7 +129,7 @@ class _CalendarState extends State<Calendar> {
                             height: 5,
                           ),
                           Text(
-                            provider.allDates[index],
+                            '${DateTime.parse(date).day}',
                             style: TextStyle(
                               fontSize: 16,
                               color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,
@@ -162,13 +139,7 @@ class _CalendarState extends State<Calendar> {
                             height: 5,
                           ),
                           Text(
-                            listOfDays[DateTime.now()
-                                        .add(
-                                          Duration(days: index),
-                                        )
-                                        .weekday -
-                                    1]
-                                .toString(),
+                            DateFormat.E().format(DateTime.parse(date)),
                             style: TextStyle(
                               fontSize: 16,
                               color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,

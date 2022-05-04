@@ -15,18 +15,16 @@ class RequestAppointmentProvider with ChangeNotifier {
     return [..._requestDoctors];
   }
 
-  Future<RequestTimeModel?> getTime(int date) async {
+  Future<RequestTimeModel?> getTime(String date) async {
     try {
-      var _collection = await db.collection('available').doc('$date').get();
+      var _collection = await db.collection('available').doc(date).get();
 
       RequestTimeModel? tempData;
 
-      tempData =
-          RequestTimeModel.fromJson(_collection.data() as Map<String, dynamic>);
+      tempData = RequestTimeModel.fromJson(_collection.data() as Map<String, dynamic>);
 
       _requestModel = tempData;
 
-      // getDoctorsWithTime(25, '9:00');
       return tempData;
     } catch (e) {
       print(e);
@@ -34,13 +32,11 @@ class RequestAppointmentProvider with ChangeNotifier {
     }
   }
 
-  Future<List<RequestDocModel>?> getDoctorsWithTime(
-      int date, String time) async {
+  Future<List<RequestDocModel>?> getDoctorsWithTime(String date, String time) async {
     try {
-      var _collection =
-          await db.collection('available/$date/docs').doc(time).get();
+      final _collection = await db.collection('available/$date/docs').doc(time).get();
 
-      var data = _collection.data();
+      final data = _collection.data();
       List<RequestDocModel>? tempData = [];
 
       data!.forEach((key, value) {

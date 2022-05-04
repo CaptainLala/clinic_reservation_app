@@ -46,8 +46,7 @@ class AppointmentTime extends StatelessWidget {
             date.assignTime(
               value.toString(),
             );
-            Provider.of<RequestAppointmentProvider>(context, listen: false)
-                .getDoctorsWithTime(date.selectedDate!, value.toString());
+            Provider.of<RequestAppointmentProvider>(context, listen: false).getDoctorsWithTime(date.selectedDateTime!, value.toString());
           },
           spacing: 5,
           horizontal: false,

@@ -2,6 +2,7 @@ import 'package:clinic_reservation_app/models/appointments.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class AppointmentsProvider with ChangeNotifier {
   final db = FirebaseFirestore.instance;
@@ -37,60 +38,47 @@ class AppointmentsProvider with ChangeNotifier {
       _appo = tempData;
       return tempData;
     } catch (e) {
-      print(e);
+      Logger().e(e);
       rethrow;
     }
   }
 
-  Future createAppointment(String docId, String userId, String date,
-      String time, String purpose, bool status) async {
+  Future createAppointment({
+    required String docId,
+    required String userId,
+    required String date,
+    required String time,
+    required String purpose,
+    required bool status,
+  }) async {
     try {
       await db
           .collection('appointments')
           .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
-          .set({
-        "date": date,
-        "docid": docId,
-        "purpose": purpose,
-        "status": false,
-        "time": time,
-        "uid": user.currentUser!.uid
-      });
+          .set({"date": date, "docid": docId, "purpose": purpose, "status": false, "time": time, "uid": user.currentUser!.uid});
 
-      await db
-          .collection('available/$date/docs')
-          .doc(time)
-          .update({"$docId.isReserved": true});
+      await db.collection('available/$date/docs').doc(time).update({"$docId.isReserved": true});
     } catch (e) {
-      print(e);
+      Logger().e(e);
       rethrow;
     }
   }
 
   Future updateStatus(String date, String time, String docId) async {
     try {
-      await db
-          .collection('appointments')
-          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
-          .update({"status": true});
+      await db.collection('appointments').doc('${user.currentUser!.uid}_${date}_${time}_$docId').update({"status": true});
     } catch (e) {
-      print(e);
+      Logger().e(e);
       rethrow;
     }
   }
 
   Future deleteAppointment(String date, String time, String docId) async {
     try {
-      db
-          .collection('appointments')
-          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
-          .delete();
-      await db
-          .collection('available/$date/docs')
-          .doc(time)
-          .update({"$docId.isReserved": false});
+      db.collection('appointments').doc('${user.currentUser!.uid}_${date}_${time}_$docId').delete();
+      await db.collection('available/$date/docs').doc(time).update({"$docId.isReserved": false});
     } catch (e) {
-      print(e);
+      Logger().e(e);
       rethrow;
     }
   }

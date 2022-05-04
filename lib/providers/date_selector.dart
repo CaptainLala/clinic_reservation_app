@@ -9,12 +9,14 @@ class DateSelector with ChangeNotifier {
   String? _docId;
   String? _purpose;
   String? _docName;
+  String? _selectedDateTime;
 
   int? get selectedDate => _selectedDate;
   String? get selecredTime => _selecredTime;
   String? get docId => _docId;
   String? get purpose => _purpose;
   String? get docName => _docName;
+  String? get selectedDateTime => _selectedDateTime;
 
   void assignDate(String date) {
     _selecredTime = date;
@@ -40,6 +42,11 @@ class DateSelector with ChangeNotifier {
 
   void assignDocName(String docName) {
     _docName = docName;
+    notifyListeners();
+  }
+
+  void assignSelectedDateTime(String selectedDateTime) {
+    _selectedDateTime = selectedDateTime;
     notifyListeners();
   }
 

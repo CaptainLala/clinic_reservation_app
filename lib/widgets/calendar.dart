@@ -1,6 +1,7 @@
 import 'package:clinic_reservation_app/providers/date_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Calendar extends StatefulWidget {
@@ -14,8 +15,7 @@ class _CalendarState extends State<Calendar> {
   DateTime selectedDate = DateTime.now(); // TO tracking date
 
   int currentDateSelectedIndex = 0; //For Horizontal Date
-  ScrollController scrollController =
-      ScrollController(); //To Track Scroll of ListView
+  ScrollController scrollController = ScrollController(); //To Track Scroll of ListView
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -82,11 +82,7 @@ class _CalendarState extends State<Calendar> {
           height: 50,
           alignment: Alignment.centerLeft,
           child: Text(
-            selectedDate.day.toString() +
-                '-' +
-                listOfMonths[selectedDate.month - 1] +
-                ', ' +
-                selectedDate.year.toString(),
+            selectedDate.day.toString() + '-' + listOfMonths[selectedDate.month - 1] + ', ' + selectedDate.year.toString(),
             style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
@@ -119,6 +115,7 @@ class _CalendarState extends State<Calendar> {
                         selectedDate.day.toInt(),
                       );
                       provider.assignDate('${selectedDate.day.toInt()}');
+                      provider.assignSelectedDateTime(DateFormat('yyyy-MM-dd').format(selectedDate));
                     },
                     child: Container(
                       margin: const EdgeInsets.all(6),
@@ -133,9 +130,7 @@ class _CalendarState extends State<Calendar> {
                             blurRadius: 4,
                           ),
                         ],
-                        color: currentDateSelectedIndex == index
-                            ? const Color.fromRGBO(37, 41, 88, 1)
-                            : Colors.white,
+                        color: currentDateSelectedIndex == index ? const Color.fromRGBO(37, 41, 88, 1) : Colors.white,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -150,9 +145,7 @@ class _CalendarState extends State<Calendar> {
                                 .toString(),
                             style: TextStyle(
                               fontSize: 16,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,
                             ),
                           ),
                           const SizedBox(
@@ -162,9 +155,7 @@ class _CalendarState extends State<Calendar> {
                             provider.allDates[index],
                             style: TextStyle(
                               fontSize: 16,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,
                             ),
                           ),
                           const SizedBox(
@@ -180,9 +171,7 @@ class _CalendarState extends State<Calendar> {
                                 .toString(),
                             style: TextStyle(
                               fontSize: 16,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: currentDateSelectedIndex == index ? Colors.white : Colors.grey,
                             ),
                           ),
                         ],

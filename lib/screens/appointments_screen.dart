@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/models/users.dart';
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
+import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +13,13 @@ class AppointmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<dynamic> initRequest(context) async {
+      UserModel doctor = Provider.of<UserProvider>(context).user!;
       final List<Future<dynamic>> promise = [
-        Provider.of<AppointmentsProvider>(context, listen: false)
-            .getUserAppointments()
+        doctor.role == 'doctor'
+            ? Provider.of<AppointmentsProvider>(context, listen: false)
+                .getDoctosAppointment()
+            : Provider.of<AppointmentsProvider>(context, listen: false)
+                .getUserAppointments()
       ];
       return Future.wait(promise);
     }

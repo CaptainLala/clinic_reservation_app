@@ -3,7 +3,7 @@ class Appointment {
   final String time;
   final String userId;
   final String docId;
-  final bool status; // ... Pending, Done
+  final bool pending; // ... Pending, Done
   final String purpose; // ... Plazma, Visit
 
   Appointment({
@@ -11,7 +11,7 @@ class Appointment {
     required this.time,
     required this.userId,
     required this.docId,
-    required this.status,
+    required this.pending,
     required this.purpose,
   });
 
@@ -21,7 +21,7 @@ class Appointment {
       time: json['time'],
       userId: json['uid'],
       docId: json['docid'],
-      status: json['status'],
+      pending: json['pending'],
       purpose: json['purpose'],
     );
   }

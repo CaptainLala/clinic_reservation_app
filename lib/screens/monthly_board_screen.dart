@@ -1,7 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
+import 'package:clinic_reservation_app/providers/bar_provider.dart';
+import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
 import 'package:clinic_reservation_app/widgets/bar_chart_widget.dart';
 import 'package:clinic_reservation_app/widgets/demo_appointment.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MonthlyBoardScreen extends StatelessWidget {
   static const routeName = '/monthly_board';
@@ -9,6 +13,15 @@ class MonthlyBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<dynamic> initRequest(context) async {
+      final List<Future<dynamic>> promise = [
+        Provider.of<BarProvider>(context).getMonthlyBoard(),
+        Provider.of<AppointmentsProvider>(context, listen: false)
+            .getDoctosAppointment()
+      ];
+      return Future.wait(promise);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
@@ -20,29 +33,61 @@ class MonthlyBoardScreen extends StatelessWidget {
         backgroundColor: Colors.white10,
         iconTheme: Theme.of(context).iconTheme,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 15,
-          horizontal: 15,
-        ),
-        child: ListView(
-          children: [
-            const BarChartWidget(),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                bottom: 15,
+      body: FutureBuilder(
+        future: initRequest(context),
+        builder: (context, snap) {
+          if (snap.hasData) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 15,
+                horizontal: 15,
               ),
-              child: AutoSizeText(
-                'Appointments:',
-                style: Theme.of(context).textTheme.bodyText1,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const BarChartWidget(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 15,
+                      ),
+                      child: AutoSizeText(
+                        'Appointments:',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Consumer<AppointmentsProvider>(
+                        builder: (context, provider, _) {
+                          return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return DemoAppointment(
+                                appo: provider.appo[index],
+                              );
+                            },
+                            itemCount: provider.appo.length,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 10,
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            const DemoAppointment(),
-            const DemoAppointment(),
-            const DemoAppointment(),
-          ],
-        ),
+            );
+          } else if (snap.hasError) {
+            return Text(snap.error.toString());
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

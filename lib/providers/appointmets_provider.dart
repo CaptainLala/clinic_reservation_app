@@ -43,6 +43,35 @@ class AppointmentsProvider with ChangeNotifier {
     }
   }
 
+  Future<List<Appointment>> getDoctosAppointment() async {
+    try {
+      List<Appointment> tempData = [];
+
+      var _collection = await db
+          .collection('appointments')
+          .where(
+            'docid',
+            isEqualTo: user.currentUser!.uid,
+          )
+          .get();
+
+      _collection.docs
+          .map(
+            (e) => tempData.add(
+              Appointment.fromJson(
+                e.data(),
+              ),
+            ),
+          )
+          .toList();
+      _appo = tempData;
+      return tempData;
+    } catch (e) {
+      Logger().e(e);
+      rethrow;
+    }
+  }
+
   Future createAppointment({
     required String docId,
     required String userId,
@@ -52,12 +81,19 @@ class AppointmentsProvider with ChangeNotifier {
     required bool status,
   }) async {
     try {
-      await db
-          .collection('appointments')
-          .doc('${user.currentUser!.uid}_${date}_${time}_$docId')
-          .set({"date": date, "docid": docId, "purpose": purpose, "status": false, "time": time, "uid": user.currentUser!.uid});
+      await db.collection('appointments').doc('${date}_${time}_$docId').set({
+        "date": date,
+        "docid": docId,
+        "purpose": purpose,
+        "pending": true,
+        "time": time,
+        "uid": user.currentUser!.uid
+      });
 
-      await db.collection('available/$date/docs').doc(time).update({"$docId.isReserved": true});
+      await db
+          .collection('available/$date/docs')
+          .doc(time)
+          .update({"$docId.isReserved": true});
     } catch (e) {
       Logger().e(e);
       rethrow;
@@ -66,7 +102,26 @@ class AppointmentsProvider with ChangeNotifier {
 
   Future updateStatus(String date, String time, String docId) async {
     try {
-      await db.collection('appointments').doc('${user.currentUser!.uid}_${date}_${time}_$docId').update({"status": true});
+      await db
+          .collection('appointments')
+          .doc('${date}_${time}_$docId')
+          .update({"pending": false});
+
+      var _collection =
+          await db.collection('finished').doc('${docId}_$date').get();
+      if (_collection.exists) {
+        await db.collection('finished').doc('${docId}_$date').update({
+          'docid': docId,
+          'date': date,
+          'count': FieldValue.increment(1),
+        });
+      } else {
+        await db.collection('finished').doc('${docId}_$date').set({
+          'docid': docId,
+          'date': date,
+          'count': 1,
+        });
+      }
     } catch (e) {
       Logger().e(e);
       rethrow;
@@ -75,8 +130,11 @@ class AppointmentsProvider with ChangeNotifier {
 
   Future deleteAppointment(String date, String time, String docId) async {
     try {
-      db.collection('appointments').doc('${user.currentUser!.uid}_${date}_${time}_$docId').delete();
-      await db.collection('available/$date/docs').doc(time).update({"$docId.isReserved": false});
+      db.collection('appointments').doc('${date}_${time}_$docId').delete();
+      await db
+          .collection('available/$date/docs')
+          .doc(time)
+          .update({"$docId.isReserved": false});
     } catch (e) {
       Logger().e(e);
       rethrow;

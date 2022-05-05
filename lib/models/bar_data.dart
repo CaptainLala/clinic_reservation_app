@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
-
 class BarData {
   // for ordering in the graph
-  final int id;
-  final String name;
-  final double y;
-  final Color color;
+  final String date;
+  final int y;
 
   const BarData({
-    required this.name,
-    required this.id,
+    required this.date,
     required this.y,
-    required this.color,
   });
+
+  factory BarData.fromJson(Map<String, dynamic> json) {
+    return BarData(
+      date: json['date'],
+      y: json['count'],
+    );
+  }
 }

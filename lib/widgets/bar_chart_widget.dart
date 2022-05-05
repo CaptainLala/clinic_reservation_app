@@ -1,11 +1,15 @@
+import 'package:clinic_reservation_app/providers/bar_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BarChartWidget extends StatelessWidget {
   const BarChartWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<BarProvider>(context);
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.30,
@@ -27,7 +31,7 @@ class BarChartWidget extends StatelessWidget {
             show: false,
           ),
           alignment: BarChartAlignment.spaceAround,
-          maxY: 1500,
+          maxY: 10,
           minY: 0,
           borderData: FlBorderData(
             show: false,
@@ -44,6 +48,7 @@ class BarChartWidget extends StatelessWidget {
                 int rodIndex,
               ) {
                 return BarTooltipItem(
+                  //count
                   rod.y.round().toString(),
                   const TextStyle(
                     fontSize: 15,
@@ -67,19 +72,19 @@ class BarChartWidget extends StatelessWidget {
               getTitles: (double value) {
                 switch (value.toInt()) {
                   case 0:
-                    return '7/21';
+                    return data.barData[0].date;
                   case 1:
-                    return '8/21';
+                    return data.barData[1].date;
                   case 2:
-                    return '9/21';
+                    return data.barData[2].date;
                   case 3:
-                    return '10/21';
+                    return data.barData[3].date;
                   case 4:
-                    return '11/21';
+                    return data.barData[4].date;
                   case 5:
-                    return '12/21';
+                    return data.barData[5].date;
                   case 6:
-                    return '1/22';
+                    return data.barData[6].date;
                   default:
                     return '';
                 }
@@ -89,74 +94,7 @@ class BarChartWidget extends StatelessWidget {
             topTitles: SideTitles(showTitles: false),
             rightTitles: SideTitles(showTitles: false),
           ),
-          barGroups: [
-            BarChartGroupData(
-              x: 1,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 946,
-                  width: 20,
-                  colors: [Colors.white],
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 2,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 780,
-                  width: 20,
-                  colors: [Colors.white],
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 3,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 555,
-                  width: 20,
-                  colors: [Colors.white],
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 4,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 768,
-                  width: 20,
-                  colors: [Colors.amber],
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 5,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 450,
-                  width: 20,
-                  colors: [Colors.white],
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 6,
-              showingTooltipIndicators: [0],
-              barRods: [
-                BarChartRodData(
-                  y: 670,
-                  width: 20,
-                  colors: [Colors.white],
-                ),
-              ],
-            )
-          ],
+          barGroups: data.barY,
         ),
       ),
     );

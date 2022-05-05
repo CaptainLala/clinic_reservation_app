@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/providers/bar_provider.dart';
-import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
 import 'package:clinic_reservation_app/widgets/bar_chart_widget.dart';
 import 'package:clinic_reservation_app/widgets/demo_appointment.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +16,9 @@ class MonthlyBoardScreen extends StatelessWidget {
       final List<Future<dynamic>> promise = [
         Provider.of<BarProvider>(context).getMonthlyBoard(),
         Provider.of<AppointmentsProvider>(context, listen: false)
-            .getDoctosAppointment()
+            .getFinishedAppointment(),
       ];
+
       return Future.wait(promise);
     }
 

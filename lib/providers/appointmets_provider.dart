@@ -72,6 +72,36 @@ class AppointmentsProvider with ChangeNotifier {
     }
   }
 
+  Future<List<Appointment>> getFinishedAppointment() async {
+    try {
+      List<Appointment> tempData = [];
+
+      var _collection = await db
+          .collection('appointments')
+          .where(
+            'docid',
+            isEqualTo: user.currentUser!.uid,
+          )
+          .where('pending', isEqualTo: false)
+          .get();
+
+      _collection.docs
+          .map(
+            (e) => tempData.add(
+              Appointment.fromJson(
+                e.data(),
+              ),
+            ),
+          )
+          .toList();
+      _appo = tempData;
+      return tempData;
+    } catch (e) {
+      Logger().e(e);
+      rethrow;
+    }
+  }
+
   Future createAppointment({
     required String docId,
     required String userId,

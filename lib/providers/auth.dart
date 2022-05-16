@@ -10,7 +10,7 @@ class Auth with ChangeNotifier {
   Future signIn(BuildContext context, String email, String password) async {
     try {
       var user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: '3@4.com', password: '12345678');
+          .signInWithEmailAndPassword(email: '1@2.com', password: '12345678');
 
       if (user.user != null) {
         Navigator.of(context)

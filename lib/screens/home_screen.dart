@@ -105,27 +105,35 @@ class HomeScreen extends StatelessWidget {
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
                   ),
-                  children: const [
-                    CategoryCard(
+                  children: [
+                    const CategoryCard(
                       path: ProductsScreen.routeName,
                       title: 'Our Products',
                       image: 'assets/images/bottle.png',
                     ),
-                    CategoryCard(
+                    const CategoryCard(
                       path: LocationScreen.routeName,
                       title: 'Our Location',
                       image: 'assets/images/location.png',
                     ),
-                    CategoryCard(
+                    const CategoryCard(
                       path: AboutUsScreen.routeName,
                       title: 'Contact Us',
                       image: 'assets/images/contact.png',
                     ),
-                    CategoryCard(
-                      path: MonthlyBoardScreen.routeName,
-                      title: 'Monthly Board',
-                      image: 'assets/images/money_graph.png',
-                    ),
+                    Consumer<UserProvider>(
+                      builder: (context, provider, _) {
+                        if (provider.user!.role == "doctor") {
+                          return const CategoryCard(
+                            path: MonthlyBoardScreen.routeName,
+                            title: 'Monthly Board',
+                            image: 'assets/images/money_graph.png',
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    )
                   ],
                 ),
               ],

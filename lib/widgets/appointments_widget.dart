@@ -74,7 +74,7 @@ class AppointmetnWidget extends StatelessWidget {
               },
               //checkes whether its a doctor or a user
               itemBuilder: (BuildContext context) {
-                if (doctor.role == 'doctor') {
+                if (doctor.role == 'doctor' && appo.pending == true) {
                   return [
                     PopupMenuItem(
                       value: 0,

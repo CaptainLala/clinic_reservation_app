@@ -57,7 +57,7 @@ class MonthlyBoardScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height,
+                      height: MediaQuery.of(context).size.height * 0.6,
                       child: Consumer<AppointmentsProvider>(
                         builder: (context, provider, _) {
                           return ListView.builder(
@@ -80,8 +80,6 @@ class MonthlyBoardScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (snap.hasError) {
-            return Text(snap.error.toString());
           } else {
             return const Center(
               child: CircularProgressIndicator(),

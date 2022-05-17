@@ -21,7 +21,7 @@ class Doctor {
     return Doctor(
       id: json['uid'],
       username: json['name'],
-      image: 'assets/images/doctor_2.jpg',
+      image: json['image'],
       age: json['age'],
       phone: json['phoneNo'],
       position: 'surgeon',

@@ -10,7 +10,7 @@ class Auth with ChangeNotifier {
   Future signIn(BuildContext context, String email, String password) async {
     try {
       var user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: '1@2.com', password: '12345678');
+          .signInWithEmailAndPassword(email: '2@3.com', password: '12345678');
 
       if (user.user != null) {
         Navigator.of(context)
@@ -29,7 +29,7 @@ class Auth with ChangeNotifier {
       BuildContext context, String name, String phoneNo, int age) async {
     try {
       var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: '1@2.com',
+        email: '4@5.com',
         password: '12345678',
       );
       if (user.user != null) {

@@ -1,9 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyScreen extends StatelessWidget {
   static const routeName = '/emergency';
   const EmergencyScreen({Key? key}) : super(key: key);
+  Future<void> _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: '009647701234567',
+    );
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +76,7 @@ class EmergencyScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => _makePhoneCall(),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,10 +1,29 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clinic_reservation_app/screens/location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatelessWidget {
   static const routeName = '/about-us';
   const AboutUsScreen({Key? key}) : super(key: key);
+
+  Future<void> _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: '009647701234567',
+    );
+    await launchUrl(launchUri);
+  }
+
+  Future<void> _sendEmail() async {
+    final Uri launchUri = Uri(
+      scheme: 'mailto',
+      path: 'salahaddin_clinic@example.com',
+      query: 'subject=Feedback&body=Write us a feedback Version 3.23',
+    );
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,47 +64,62 @@ class AboutUsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                const Icon(Icons.phone),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25,
+            InkWell(
+              borderRadius: BorderRadius.circular(25),
+              onTap: () => _makePhoneCall(),
+              child: Row(
+                children: [
+                  const Icon(Icons.phone),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 25,
+                    ),
+                    child: AutoSizeText(
+                      '07701234567',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
                   ),
-                  child: AutoSizeText(
-                    '07701234567',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              children: [
-                const Icon(Icons.mail),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25,
+            InkWell(
+              borderRadius: BorderRadius.circular(25),
+              onTap: () => _sendEmail(),
+              child: Row(
+                children: [
+                  const Icon(Icons.mail),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 25,
+                    ),
+                    child: AutoSizeText(
+                      'Send us an email',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
                   ),
-                  child: AutoSizeText(
-                    'Send us an email',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              children: [
-                const Icon(Icons.location_on),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25,
+            InkWell(
+              borderRadius: BorderRadius.circular(25),
+              onTap: () => Navigator.pushReplacementNamed(
+                context,
+                LocationScreen.routeName,
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 25,
+                    ),
+                    child: AutoSizeText(
+                      'Find us on the map',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
                   ),
-                  child: AutoSizeText(
-                    'Find us on the map',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
             const Divider(
               color: Color.fromRGBO(37, 41, 88, 1),

@@ -3,6 +3,7 @@ import 'package:clinic_reservation_app/models/users.dart';
 import 'package:clinic_reservation_app/providers/appointmets_provider.dart';
 import 'package:clinic_reservation_app/providers/user_provider.dart';
 import 'package:clinic_reservation_app/widgets/appointments_widget.dart';
+import 'package:clinic_reservation_app/widgets/empty_appointments.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,18 +42,20 @@ class AppointmentsScreen extends StatelessWidget {
           if (snap.hasData) {
             return Consumer<AppointmentsProvider>(
               builder: (context, provider, _) {
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                    return AppointmetnWidget(
-                      appo: provider.appo[index],
-                    );
-                  },
-                  itemCount: provider.appo.length,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 10,
-                  ),
-                );
+                return provider.appo.isEmpty
+                    ? const EmptyAppointments()
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          return AppointmetnWidget(
+                            appo: provider.appo[index],
+                          );
+                        },
+                        itemCount: provider.appo.length,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                      );
               },
             );
           } else {

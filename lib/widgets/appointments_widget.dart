@@ -58,201 +58,223 @@ class AppointmetnWidget extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15),
-            child: PopupMenuButton(
-              icon: Icon(
-                Icons.more_vert,
-                size: 50,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              onSelected: (val) {
-                if (val == 0) {
-                  Navigator.pushNamed(
-                      context, RequestAppointmentScreen.routeName);
-                }
-              },
-              //checkes whether its a doctor or a user
-              itemBuilder: (BuildContext context) {
-                if (doctor.role == 'doctor' && appo.pending == true) {
-                  return [
-                    PopupMenuItem(
-                      value: 0,
-                      child: const Text(
-                        "Edit Appointment",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromRGBO(37, 41, 88, 1),
-                        ),
-                      ),
-                      onTap: () {
-                        Provider.of<AppointmentsProvider>(context,
-                                listen: false)
-                            .deleteAppointment(
-                                appo.date, appo.time, appo.docId);
-                      },
+          appo.pending == true
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: PopupMenuButton(
+                    icon: Icon(
+                      Icons.more_vert,
+                      size: 50,
+                      color: Theme.of(context).iconTheme.color,
                     ),
-                    PopupMenuItem(
-                      value: 1,
-                      child: Text(
-                        "Appointment Done",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.green.shade500,
-                        ),
-                      ),
-                      onTap: () {
-                        Provider.of<AppointmentsProvider>(context,
-                                listen: false)
-                            .updateStatus(appo.date, appo.time, appo.docId);
-                      },
-                    ),
-                    PopupMenuItem(
-                      value: 2,
-                      child: const Text(
-                        "Cancel Appointment",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.red,
-                        ),
-                      ),
-                      onTap: () {
-                        Future.delayed(
-                          const Duration(seconds: 0),
-                          () => showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30.0),
-                                ),
-                              ),
-                              title: Text(
-                                'Cancel Appointment',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                              content: Text(
-                                'Would you like to cancel this appointment?',
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'No'),
-                                  child: Text(
-                                    'No',
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Provider.of<AppointmentsProvider>(context,
-                                            listen: false)
-                                        .deleteAppointment(
-                                            appo.date, appo.time, appo.docId);
-                                    Navigator.pop(context, 'Yes');
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.redAccent,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                    onSelected: (val) {
+                      if (val == 0) {
+                        Navigator.pushNamed(
+                          context,
+                          RequestAppointmentScreen.routeName,
+                          arguments: {"uid": appo.userId},
                         );
-                      },
-                    ),
-                  ];
-                } else {
-                  return [
-                    PopupMenuItem(
-                      value: 0,
-                      child: const Text(
-                        "Edit Appointment",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromRGBO(37, 41, 88, 1),
-                        ),
-                      ),
-                      onTap: () {
-                        Provider.of<AppointmentsProvider>(context,
-                                listen: false)
-                            .deleteAppointment(
-                                appo.date, appo.time, appo.docId);
-                      },
-                    ),
-                    PopupMenuItem(
-                      value: 2,
-                      child: const Text(
-                        "Cancel Appointment",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.red,
-                        ),
-                      ),
-                      onTap: () {
-                        Future.delayed(
-                          const Duration(seconds: 0),
-                          () => showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30.0),
-                                ),
+                      }
+                    },
+                    //checkes whether its a doctor or a user
+                    itemBuilder: (BuildContext context) {
+                      if (doctor.role == 'doctor' && appo.pending == true) {
+                        return [
+                          PopupMenuItem(
+                            value: 0,
+                            child: const Text(
+                              "Edit Appointment",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromRGBO(37, 41, 88, 1),
                               ),
-                              title: Text(
-                                'Cancel Appointment',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                              content: Text(
-                                'Would you like to cancel this appointment?',
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'No'),
-                                  child: Text(
-                                    'No',
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Provider.of<AppointmentsProvider>(context,
-                                            listen: false)
-                                        .deleteAppointment(
-                                            appo.date, appo.time, appo.docId);
-                                    Navigator.pop(context, 'Yes');
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.redAccent,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
+                            onTap: () {
+                              Provider.of<AppointmentsProvider>(context,
+                                      listen: false)
+                                  .deleteAppointment(
+                                appo.date,
+                                appo.time,
+                                appo.docId,
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ];
-                }
-              },
-            ),
-          ),
+                          PopupMenuItem(
+                            value: 1,
+                            child: Text(
+                              "Appointment Done",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.green.shade500,
+                              ),
+                            ),
+                            onTap: () {
+                              Provider.of<AppointmentsProvider>(context,
+                                      listen: false)
+                                  .updateStatus(
+                                      appo.date, appo.time, appo.docId);
+                              Navigator.pop(context);
+                            },
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: const Text(
+                              "Cancel Appointment",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red,
+                              ),
+                            ),
+                            onTap: () {
+                              Future.delayed(
+                                const Duration(seconds: 0),
+                                () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      'Cancel Appointment',
+                                      style:
+                                          Theme.of(context).textTheme.headline3,
+                                    ),
+                                    content: Text(
+                                      'Would you like to cancel this appointment?',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'No'),
+                                        child: Text(
+                                          'No',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Provider.of<AppointmentsProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .deleteAppointment(appo.date,
+                                                  appo.time, appo.docId);
+                                          Navigator.pop(context, 'Yes');
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          'Yes',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.redAccent,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ];
+                      } else {
+                        return [
+                          PopupMenuItem(
+                            value: 0,
+                            child: const Text(
+                              "Edit Appointment",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromRGBO(37, 41, 88, 1),
+                              ),
+                            ),
+                            onTap: () {
+                              Provider.of<AppointmentsProvider>(context,
+                                      listen: false)
+                                  .deleteAppointment(
+                                      appo.date, appo.time, appo.docId);
+                            },
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: const Text(
+                              "Cancel Appointment",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red,
+                              ),
+                            ),
+                            onTap: () {
+                              Future.delayed(
+                                const Duration(seconds: 0),
+                                () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      'Cancel Appointment',
+                                      style:
+                                          Theme.of(context).textTheme.headline3,
+                                    ),
+                                    content: Text(
+                                      'Would you like to cancel this appointment?',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'No'),
+                                        child: Text(
+                                          'No',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Provider.of<AppointmentsProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .deleteAppointment(appo.date,
+                                                  appo.time, appo.docId);
+                                          Navigator.pop(context, 'Yes');
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          'Yes',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.redAccent,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ];
+                      }
+                    },
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

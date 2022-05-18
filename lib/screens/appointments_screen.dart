@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 class AppointmentsScreen extends StatelessWidget {
   static const routeName = '/appointments_screen';
+
   const AppointmentsScreen({Key? key}) : super(key: key);
 
   @override

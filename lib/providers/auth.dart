@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 class Auth with ChangeNotifier {
   Dio dio = Dio();
 
-  Future signIn(BuildContext context, String email, String password) async {
+  Future signIn(BuildContext context, String email) async {
     try {
       var user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: '3@4.com', password: '12345678');
+          .signInWithEmailAndPassword(email: email, password: '12345678');
 
       if (user.user != null) {
         Navigator.of(context)
@@ -29,15 +29,17 @@ class Auth with ChangeNotifier {
       BuildContext context, String name, String phoneNo, int age) async {
     try {
       var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: '4@5.com',
+        email: '6@7.com',
         password: '12345678',
       );
       if (user.user != null) {
         FirebaseFirestore.instance.collection('users').doc(user.user!.uid).set({
           'name': name,
           'phoneNo': phoneNo,
+          'image': "assets/images/doctor_3.jpg",
           'age': age,
           'role': 'doctor',
+          'uid': user.user!.uid
         });
         FirebaseFirestore.instance.collection('usernames').doc(name).set({
           'uid': user.user!.uid,

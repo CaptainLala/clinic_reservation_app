@@ -18,13 +18,16 @@ class RequestAppointmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     final user = FirebaseAuth.instance;
     String? date = Provider.of<DateSelector>(context).selectedDateTime;
 
     Future<dynamic> initRequest(context) async {
       final List<Future<dynamic>> promise = [
         Provider.of<DateSelector>(context).getAllDates(),
-        Provider.of<RequestAppointmentProvider>(context, listen: false).getTime(date ?? DateFormat('yyyy-MM-dd').format(DateTime.now())),
+        Provider.of<RequestAppointmentProvider>(context, listen: false)
+            .getTime(date ?? DateFormat('yyyy-MM-dd').format(DateTime.now())),
       ];
       return Future.wait(promise);
     }
@@ -44,8 +47,10 @@ class RequestAppointmentScreen extends StatelessWidget {
         future: initRequest(context),
         builder: (context, snap) {
           if (snap.hasData) {
-            return Consumer3<RequestAppointmentProvider, DateSelector, AppointmentsProvider>(
-              builder: (context, requestProvider, dateProvider, appointmentProvider, _) {
+            return Consumer3<RequestAppointmentProvider, DateSelector,
+                AppointmentsProvider>(
+              builder: (context, requestProvider, dateProvider,
+                  appointmentProvider, _) {
                 return ListView(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,
@@ -63,15 +68,28 @@ class RequestAppointmentScreen extends StatelessWidget {
                       child: Center(
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (dateProvider.selectedDate != null && dateProvider.selecredTime != null && dateProvider.docId != null) {
-                              appointmentProvider.createAppointment(
-                                docId: dateProvider.docId!,
-                                userId: user.currentUser!.uid,
-                                date: dateProvider.selectedDateTime!,
-                                time: dateProvider.selecredTime!,
-                                purpose: dateProvider.purpose!,
-                                status: false,
-                              );
+                            if (dateProvider.selectedDate != null &&
+                                dateProvider.selecredTime != null &&
+                                dateProvider.docId != null) {
+                              if (arguments.isEmpty) {
+                                appointmentProvider.createAppointment(
+                                  docId: dateProvider.docId!,
+                                  userId: user.currentUser!.uid,
+                                  date: dateProvider.selectedDateTime!,
+                                  time: dateProvider.selecredTime!,
+                                  purpose: dateProvider.purpose!,
+                                  status: false,
+                                );
+                              } else {
+                                appointmentProvider.createAppointment(
+                                  docId: dateProvider.docId!,
+                                  userId: arguments['uid'],
+                                  date: dateProvider.selectedDateTime!,
+                                  time: dateProvider.selecredTime!,
+                                  purpose: dateProvider.purpose!,
+                                  status: false,
+                                );
+                              }
 
                               Navigator.pop(context);
                             }
@@ -91,8 +109,10 @@ class RequestAppointmentScreen extends StatelessWidget {
                                 50,
                               ),
                             ),
-                            backgroundColor: MaterialStateProperty.all<Color>(const Color.fromRGBO(37, 41, 88, 1)),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color.fromRGBO(37, 41, 88, 1)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25),
                               ),

@@ -117,7 +117,7 @@ class AppointmentsProvider with ChangeNotifier {
         "purpose": purpose,
         "pending": true,
         "time": time,
-        "uid": user.currentUser!.uid
+        "uid": userId
       });
 
       await db
@@ -159,6 +159,19 @@ class AppointmentsProvider with ChangeNotifier {
   }
 
   Future deleteAppointment(String date, String time, String docId) async {
+    try {
+      db.collection('appointments').doc('${date}_${time}_$docId').delete();
+      await db
+          .collection('available/$date/docs')
+          .doc(time)
+          .update({"$docId.isReserved": false});
+    } catch (e) {
+      Logger().e(e);
+      rethrow;
+    }
+  }
+
+  Future doctorDeleteAppointment(String date, String time, String docId) async {
     try {
       db.collection('appointments').doc('${date}_${time}_$docId').delete();
       await db

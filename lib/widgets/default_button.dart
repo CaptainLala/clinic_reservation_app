@@ -1,6 +1,4 @@
-import 'package:clinic_reservation_app/providers/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class DefaultButton extends StatelessWidget {
   final String label;
@@ -13,12 +11,6 @@ class DefaultButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () async {
         Navigator.pushReplacementNamed(context, route);
-        final data = Provider.of<Auth>(context, listen: false);
-        await data.signIn(
-          context,
-          '_phoneController.text',
-          '_passwordController.text',
-        );
       },
       child: Text(
         label,

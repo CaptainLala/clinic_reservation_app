@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clinic_reservation_app/models/appointments.dart';
+import 'package:clinic_reservation_app/screens/request_appointment_screen.dart';
 import 'package:flutter/material.dart';
 
 class DemoAppointment extends StatelessWidget {
@@ -57,6 +58,8 @@ class DemoAppointment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
             child: PopupMenuButton<String>(
+              onSelected: (val) => Navigator.of(context)
+                  .pushReplacementNamed(RequestAppointmentScreen.routeName),
               icon: Icon(
                 Icons.more_vert,
                 size: 50,
